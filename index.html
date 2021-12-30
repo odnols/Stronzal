@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    
+    <title>Stronzal</title>
+    <link id="icone_pag" rel="shortcut icon" href="img/music_disc_otherside.png">
+
+    <link href="css/jplayer.blue.monday.css" rel="stylesheet" type="text/css">
+    
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/animations.css" rel="stylesheet" type="text/css">
+
+    <script src="js/plugins/jquery.min.js"></script>
+    <script type="text/JavaScript" src="http://demo.chapmanit.com/jplayerPlaylist/js/jquery.jplayer.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/6c1b2d82eb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1 id="stronzal">Stronzal</h1>
+
+    <!-- Código para forçar a execução da primeira música quando a página abre. -->
+    <div id="jquery_jplayer" style="position: absolute; top: 0px; left: -9999px;">
+        <audio id="jqjp_audio_0" preload="none" src="songs/1.mp3"></audio>
+    </div>
+
+    <div id="playlist">
+        <span id="faixas_pl"></span>
+    </div>
+
+    <div id="infos_faixa">
+        <img id="capa_album" src="#">
+
+        <div class="player-display">
+            <span id="nome_artista"></span> <br>
+            <span id="nome_faixa"></span>
+        </div>
+    </div>
+
+    <div class="jp-playlist-player">
+        <div class="top-bar">
+            <div class="container">
+                <div class="player-controls">
+                    <a href="#" class="icon_control" id="jplayer_repeat"><i class="icn_ctrl fas fa-redo-alt icons_secundarios"></i></a>
+                    <a href="#" class="icon_control" id="jplayer_anterior"><i class="icn_ctrl fas fa-fast-backward"></i></a>
+                    <a href="#" class="icon_control" id="jplayer_play"><i class="icn_ctrl fas fa-play-circle"></i></a>
+                    <a href="#" class="icon_control" id="jplayer_pause"><i class="icn_ctrl fas fa-pause-circle"></i></a>
+                    <a href="#" class="icon_control" id="jplayer_proximo"><i class="icn_ctrl fas fa-fast-forward"></i></i></a>
+                    <a href="#" class="icon_control" id="jplayer_random"><i class="icn_ctrl fas fa-random icons_secundarios status_random"></i></a>
+                </div>
+
+                <div class="player-timeline">
+                    <div id="jplayer_tempo_execucao" style="float: left;">00:00</div>
+                    <div class="player-timeline-control"><div id="progress_bar"></div></div>
+                    <div id="jplayer_tempo_total" style="float: right;">00:00</div>
+                </div>
+
+                <div class="volume_control">
+                    <i class="fas fa-volume-down fa-2x"></i>
+                    <div id="jplayer_volume_bar" class="jp-volume-bar">
+                        <div id="jplayer_volume_bar_value" class="jp-volume-bar-value"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fundo_capa"></div>
+</body>
+<script src="js/index.js"></script>
+</html>

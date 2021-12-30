@@ -1,0 +1,243 @@
+@font-face{
+    font-family: BilliomDreams_PERSONAL;
+    src: url('../fontes/BillionDreams.ttf');
+}
+body {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    background-color: black;
+    overflow-y: hidden;
+}
+.top-bar{
+    width: 100%;
+    height: 50px;
+    background: #141414;
+    color: #888;
+    line-height: 30px;
+    position: absolute;
+    bottom: 0px;
+    z-index: 3;
+    box-shadow: 0px 0px 15px black;
+}
+.player-controls{
+    padding-left: 4% !important;
+}
+.icon_control{
+    padding: 10px;
+}
+/* .icn_ctrl{ */
+    /* width: 10px !important; */
+    /* height: 10px !important; */
+
+/* } */
+.icons_secundarios{
+    color: rgb(105, 105, 105);
+}
+.top-bar .player-controls {
+    float: left;
+    padding: 10px;
+}
+.top-bar .player-controls span:hover {
+    color: #EEE;
+}
+.top-bar .player {
+    float: left;
+}
+.top-bar .player-timeline {
+    float: left;
+    max-width: 500px;
+    width: 500px;
+    position: absolute;
+    left: 50%;
+    margin-left: -250px;
+    height: 40px;
+    margin-top: 13px;
+}
+.top-bar .player-timeline-control {
+    height: 4px;
+    width: 81%;
+    margin-top: 12px;
+    border-radius: 5px;
+    float: left;
+    overflow: hidden;
+    margin-left: 5px;
+    margin-right: 5px;
+    background: rgb(105, 105, 105);
+}
+#progress_bar{
+    background-color: lightseagreen;
+    height: 4px;
+    border-radius: 5px;
+    width: 20%;
+    transition: width .1s;
+}
+a{
+    text-decoration: none !important;
+    color: rgb(141, 141, 141);;
+    transition: color .2s;
+}
+a:hover{
+    color: lightseagreen;
+}
+.jp-controls{
+    float: left;
+}
+.bttn_player{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    text-decoration: none !important;
+    float: left !important;
+}
+#jplayer_volume_bar_value{
+    width: 20%;
+    z-index: 5 !important;
+    left: 5%;
+    transition: width .2s;
+}
+#jplayer_volume_bar{
+    margin-top: 15px;
+    background-color: rgb(105, 105, 105);
+}
+.jp-volume-bar {
+    overflow: hidden;
+    left: 22px;
+    float: right;
+    width: 100px;
+    height: 5px;
+    cursor: pointer;
+}
+.jp-volume-bar-value {
+    background-color: lightseagreen;;
+    width: 0px;
+    height: 5px;
+}
+#fundo_capa{
+    filter: grayscale(1) blur(2px);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: background-image 0.2s ease-in-out;
+    transition: background-image 0.2s ease-in-out;
+}
+#player-current-track{
+    padding-right: 10px !important;
+}
+#playlist{
+    background-color: rgba(0, 0, 0, .7);
+    position: absolute;
+    width: 25%;
+    height: 92%;
+    right: 0px;
+    top: 0px;
+    z-index: 2;
+    padding-left: 5px;
+    overflow-y: auto;
+}
+.volume_control{
+    width: 10%;
+    margin-right: 20px;
+    margin-top: 10px;
+    float: right;
+}
+#infos_faixa{
+    width: 300px;
+    float: left;
+    height: 300px;
+    background-color: rgba(0, 0, 0, .7);
+    position: absolute;
+    bottom: 10px;
+    z-index: 2;
+    color: white;
+    animation: puxa_infos_faixa .5s;
+}
+#capa_album{
+    max-width: 300px;
+    max-height: 300px;
+    overflow: hidden !important;
+    float: left;
+}
+.numero_faixa{
+    float: left;
+    width: 50px;
+    text-align: right;
+    font-size: 25px;
+    padding-right: 10px;
+    padding-top: 6px;
+}
+.player-display {
+    position: fixed;
+    width: 300px;
+    padding-top: 195px;
+    padding-left: 15px;
+    height: 100%;
+}
+.nome_artista_pl{
+    font-weight: bold;
+    color: white;
+}
+.img_cover{
+    image-rendering: pixelated;
+    float: left;
+    padding-right: 15px;
+    width: 40px;
+    height: 40px;
+}
+#nome_artista{
+    font-size: 25px;
+    font-weight: bold;
+}
+#nome_faixa, .nome_faixa_pl{
+    color:rgb(163, 163, 163);
+    transition: all .2s !important;
+}
+#stronzal{
+    color: white;
+    position: fixed;
+    text-shadow: 0px 0px 2px black;
+    z-index: 5;
+    font-size: 40px;
+    padding-left: 1%;
+    top: -10px;
+    font-family: 'BillionDreams';
+}
+.item_playlist{
+    transition: background-color .2s;
+    border-radius: 5px;
+    width: 98%;
+    overflow: hidden;
+    height: 40px;
+}
+.item_playlist:hover{
+    background-color: rgba(110, 110, 110, 0.7);
+}
+.playing_now{
+    display: none;
+    margin-left: 30px;
+    width: 20px;
+}
+.barra_1, .barra_2, .barra_3, .barra_4{
+    animation: tocando_agora 1.5s infinite;
+    margin-left: 2px;
+    background-color: lightseagreen;
+    height: 38px;
+    margin-top: 0px;
+    width: 3px !important;
+    float: left;
+    transform: rotateY(180deg) !important;
+}
+.barra_2{
+    animation-delay: 700ms;
+    animation: tocando_agora2 .8s infinite;
+}
+.barra_3{
+    animation-delay: 200ms;
+}
+.barra_4{
+    animation-delay: 500ms;
+    animation: tocando_agora2 1.2s infinite;
+}

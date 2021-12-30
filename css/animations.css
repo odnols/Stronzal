@@ -1,0 +1,16 @@
+@keyframes puxa_infos_faixa {
+    from { bottom: -1000px; }
+    to { bottom: 10px; }
+}
+@keyframes tocando_agora {
+    0% { margin-top: 2px; height: 38px; }
+    20% { margin-top: 20px; height: 18px; }
+    50% { margin-top: 33px; height: 5px; }
+    100% { margin-top: 2px; height: 38px; }
+}
+@keyframes tocando_agora2 {
+    0% { margin-top: 2px; height: 36px; }
+    50% { margin-top: 30px; height: 7px; }
+    70% { margin-top: 33px; height: 4px; }
+    100% { margin-top: 2px; height: 36px; }
+}
