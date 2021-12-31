@@ -1,39 +1,37 @@
 var playItem = 0;
 var faixas_tocadas = [];
 var vol_anterior = 0;
+var playlistAtiva = 0;
+var minhaPlayList = [
+    {id: 539, mp3:"songs/238425/1.mp3", album: "238425", name:"Skyfall"}
+];
 
 var owners = {
-    "8347283" : "Admiral James T."
+    "8347283" : "Admiral James T.",
+    "1723349" : "Adele",
+    "4184959" : "C418"
 }
 
 var albuns = {
     "283472" : {
-        cover : "https://cdn.akamai.steamstatic.com/steam/apps/304730/ss_d058fe206980507fdee0a2cf92f46d9074524966.1920x1080.jpg?t=1596190747",
+        cover : "https://f4.bcbits.com/img/a3559269778_10.jpg",
         name : "Train Fever Soundtrack",
         likes : 0,
         owner : 8347283
+    },
+    "238425" : {
+        cover : "https://upload.wikimedia.org/wikipedia/pt/0/09/Capa_de_Skyfall.jpg",
+        name : "Skyfall",
+        likes : 0,
+        owner : 1723349
+    },
+    "418854" : {
+        cover : "https://i.scdn.co/image/ab67616d0000b2734cf0b29eb06a92aa96acae64",
+        name : "Minecraft - Volume Beta",
+        likes : 0,
+        owner : 4184959
     }
 }
-
-var minhaPlayList = [
-    {id: 001, mp3:"songs/1.mp3", album: "283472", name:"Backbug"},
-    {id: 002, mp3:"songs/2.mp3", album: "283472", name:"Chaka Train"},
-    {id: 003, mp3:"songs/3.mp3", album: "283472", name:"Dakota"},
-    {id: 004, mp3:"songs/4.mp3", album: "283472", name:"Feet Down Below"},
-    {id: 005, mp3:"songs/5.mp3", album: "283472", name:"Orient Train"},
-    {id: 006, mp3:"songs/6.mp3", album: "283472", name:"New World"},
-    {id: 007, mp3:"songs/7.mp3", album: "283472", name:"Swinging Priest"},
-    {id: 020, mp3:"songs/8.mp3", album: "283472", name:"Love Train"},
-    {id: 021, mp3:"songs/9.mp3", album: "283472", name:"Trailerpark"},
-    {id: 010, mp3:"songs/10.mp3", album: "283472", name:"Emma"},
-    {id: 011, mp3:"songs/11.mp3", album: "283472", name:"Chemical Train"},
-    {id: 012, mp3:"songs/12.mp3", album: "283472", name:"Disco Reprise"},
-    {id: 013, mp3:"songs/13.mp3", album: "283472", name:"Kraftwagen"},
-    {id: 014, mp3:"songs/14.mp3", album: "283472", name:"Low Down"},
-    {id: 015, mp3:"songs/15.mp3", album: "283472", name:"Lower East"},
-    {id: 016, mp3:"songs/16.mp3", album: "283472", name:"Cricket Post"},
-    {id: 017, mp3:"songs/17.mp3", album: "283472", name:"Disco (Train Fever Main Menu Theme)"},
-];
 
 function preview_playlist(){
 
@@ -120,6 +118,26 @@ $("#jplayer_pause").click(function() {
     tocando_agora("auto");
 });
 
+$("#btn_pagina_inicial").click(function() {
+    esconde_tudo();
+    $("#pagina_inicial").show();
+});
+
+$("#btn_biblioteca").click(function() {
+    esconde_tudo();
+    $("#biblioteca_user").show();
+});
+
+$("#btn_faixas").click(function() {
+    esconde_tudo();
+    $("#lista_faixas_curtidas").show();
+});
+
+$("#btn_playlists").click(function() {
+    esconde_tudo();
+    $("#lista_albuns_curtidos").show();
+});
+
 $("#jplayer_random").click(function() {
     aleatorio = aleatorio == 0 ? 1 : 0;
     let prev_random = document.getElementsByClassName("status_random");
@@ -143,6 +161,13 @@ $("#jplayer_repeat").click(function() {
 
     localStorage.setItem('repeteco_stronzal', repeteco);
 });
+
+function esconde_tudo(){
+    $("#pagina_inicial").hide();
+    $("#biblioteca_user").hide();
+    $("#lista_faixas_curtidas").hide();
+    $("#lista_albuns_curtidos").hide();
+}
 
 // Método interno de montagem e exibição da playlist
 function exibirPlayList() {
@@ -217,16 +242,18 @@ function playListProximo() {
     let faixa_escolhida = (playItem + 1 < minhaPlayList.length) ? playItem + 1 : 0;
     
     if(aleatorio){
-        if(faixas_tocadas.length == minhaPlayList.length){
-            faixas_tocadas = [];
-            faixas_tocadas.push(playItem);
+        if(minhaPlayList.length > 1){
+            if(faixas_tocadas.length == minhaPlayList.length){
+                faixas_tocadas = [];
+                faixas_tocadas.push(playItem);
+            }
+
+            do{
+                faixa_escolhida = Math.round((minhaPlayList.length - 1) * Math.random());            
+            }while(faixas_tocadas.includes(faixa_escolhida))
+
+            faixas_tocadas.push(faixa_escolhida);
         }
-
-        do{
-            faixa_escolhida = Math.round((minhaPlayList.length - 1) * Math.random());            
-        }while(faixas_tocadas.includes(faixa_escolhida))
-
-        faixas_tocadas.push(faixa_escolhida);
     }
 
     mudarPlayList(faixa_escolhida);
@@ -260,6 +287,9 @@ function tocando_agora(faixa_atual){
 
 function curtir_faixa(faixa){
 
+    if(isNaN(faixas_curtidas[0]) && faixas_curtidas.length === 1)
+        faixas_curtidas = [];
+
     if(faixas_curtidas.includes(faixa))
         faixas_curtidas.splice(faixas_curtidas.indexOf(faixa), 1);
     else
@@ -276,6 +306,8 @@ function curtir_faixa(faixa){
     setTimeout(() => {
         controles_play[0].style.animation = 'None';
     }, 1000);
+
+    atualiza_faixas_curtidas();
 }
 
 // const player = document.getElementById("jqjp_audio_0");
@@ -289,4 +321,82 @@ function desliga_som(){
     }else{
         volume_musica = vol_anterior;
     }
+}
+
+function atualiza_faixas_curtidas(){
+
+    let lista_faixas = document.getElementById("faixas_curtidas_lista");
+    lista_faixas.innerHTML = "";
+    let titl = document.getElementsByClassName("musicas_curtidas");
+
+    if(faixas_curtidas.length < 1){
+        titl[0].innerHTML = "Você ainda não curtiu nenhum som <i class='fas fa-heart-broken'></i>";
+        return;
+    }else
+        titl[0].innerHTML = "Suas músicas curtidas";
+
+    for(let i = 0; i < minhaPlayList.length; i++){        
+        if(faixas_curtidas.includes(minhaPlayList[i]["id"])){
+            let faixa_curtida = '<i class="far fa-heart fa-2x curtir_faixa faixa_n_curtida" onclick="curtir_faixa('+ minhaPlayList[i]["id"] +')"></i>';
+
+            if(faixas_curtidas.includes(minhaPlayList[i]["id"]))
+                faixa_curtida = '<i class="fas fa-heart fa-2x curtir_faixa faixa_curtida" onclick="curtir_faixa('+ minhaPlayList[i]["id"] +')"></i>';
+
+            lista_faixas.innerHTML += `<br>
+
+            <div class="item_playlist" id="faixa_scroll_0x${i}">
+                <a href="#" onclick='mudarPlayList(${i})'>
+                    
+                    <span class="numero_faixa num_faixa">${i + 1}</span>
+                    <div class="numero_faixa playing_now">
+                        <span class="barra_1"></span>
+                        <span class="barra_2"></span>
+                        <span class="barra_3"></span>
+                        <span class="barra_4"></span>
+                    </div>
+                    
+                    <img class="img_cover" src="${albuns[minhaPlayList[i]["album"]]["cover"]}">
+
+                    <span class="nome_artista_pl">${owners[albuns[minhaPlayList[i]["album"]]["owner"]]}</span><br>
+                    <span class="nome_faixa_pl">${minhaPlayList[i]["name"]}</span>
+                </a>
+
+                ${faixa_curtida}
+            </div>
+            `;
+        }
+    }
+}
+
+atualiza_faixas_curtidas();
+
+function atualiza_albuns_curtidos(){
+
+    let lista_albuns = document.getElementById("albuns_curtidos_lista");
+    lista_albuns.innerHTML = "";
+    let titl = document.getElementsByClassName("albuns_curtidos");
+
+    if(faixas_curtidas.length < 1){
+        titl[0].innerHTML = "Você ainda não curtiu nenhum albúm <i class='fas fa-heart-broken'></i>";
+        // return;
+    }else
+        titl[0].innerHTML = "Seus albúns curtidos";
+
+    Object.keys(albuns).map(function(key) {
+        lista_albuns.innerHTML += `<a href="#" class='item_album_link' onclick='carrega_playlist(${key})'><div class='item_album_curtido item_album_curtido_${key}'>
+            <h3 class='nome_item_album_curtido'>${albuns[key]["name"]}</h3>
+        </div></a>`;
+
+        let capa_album = document.getElementsByClassName(`item_album_curtido_${key}`);
+        capa_album[0].style.backgroundImage = `url(${albuns[key]["cover"]})`;
+    
+    });
+}
+
+atualiza_albuns_curtidos();
+
+function carrega_playlist(id_album){
+
+    minhaPlayList = dados_albuns(id_album);    
+    preview_playlist();
 }

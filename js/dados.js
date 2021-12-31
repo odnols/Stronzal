@@ -10,6 +10,9 @@ if(typeof faixas_c_historico !== "undefined"){
     for(let i = 0; i < faixas_c_historico.length; i++){
         faixas_curtidas.push(parseInt(faixas_c_historico[i]))
     }
+
+    if(isNaN(faixas_curtidas[0]) && faixas_curtidas.length === 1)
+        faixas_curtidas = [];
 }
 
 let volume_historico = localStorage.getItem('volume_musica');

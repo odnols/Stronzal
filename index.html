@@ -16,7 +16,7 @@
     <script src="https://kit.fontawesome.com/6c1b2d82eb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
+    
     <!-- Player -->
     <div id="jquery_jplayer"><audio id="jqjp_audio_0" preload="none" src="#" style="opacity: 0"></audio></div>
 
@@ -24,11 +24,34 @@
         <h1 id="stronzal">Stronzal</h1>
         
         <div id="buttons_nav">
-            <a href="#"><h1><i class="icons_nav fas fa-chess-queen"></i>Inicio</h1></a>
-            <a href="#"><h1><i class="icons_nav fas fa-book"></i>Biblioteca</h1></a>
-            <a href="#"><h1><i class="icons_nav fas fa-music"></i>Playlists</h1></a>
-            <a href="#"><h1><i class="icons_nav fas fa-heart" style="float: left"></i>Curtidas</h1></a>
+            <a href="#" id="btn_pagina_inicial"><h2><i class="icons_nav fas fa-chess-queen"></i>Inicio</h2></a>
+            <a href="#" id="btn_biblioteca"><h2><i class="icons_nav fas fa-book"></i>Biblioteca</h2></a>
+            <a href="#" id="btn_playlists"><h2><i class="icons_nav fas fa-music"></i>Playlists</h2></a>
+            <a href="#" id="btn_faixas"><h2><i class="icons_nav fas fa-heart" style="float: left"></i>Curtidas</h2></a>
         </div>
+    </div>
+
+    <div id="faixas_curtidas">
+        <div id="pagina_inicial">
+            <h1 class="titulo_pag">Bom dia</h1>
+            <div id="inicio_stronzal"></div>
+        </div>
+
+        <div id="biblioteca_user">
+            <h1 class="titulo_pag">Sua biblioteca</h1>
+            <div id="lista_biblioteca_pessoal"></div>
+        </div>
+
+        <div id="lista_albuns_curtidos">
+            <h1 class="titulo_pag albuns_curtidos">Seus albúns curtidos</h1>
+            <div id="albuns_curtidos_lista"></div>
+        </div>
+
+        <div id="lista_faixas_curtidas">
+            <h1 class="titulo_pag musicas_curtidas">Suas músicas curtidas</h1>
+            <div id="faixas_curtidas_lista"></div>
+        </div>
+
     </div>
 
     <div id="playlist">
@@ -75,5 +98,6 @@
     <div id="fundo_capa"></div>
 </body>
 <script src="js/dados.js"></script>
+<script src="js/albuns.js"></script>
 <script src="js/index.js"></script>
 </html>
