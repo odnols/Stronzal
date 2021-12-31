@@ -14,3 +14,8 @@
     70% { margin-top: 33px; height: 4px; }
     100% { margin-top: 2px; height: 36px; }
 }
+@keyframes favorita_faixa {
+    0% { background-color: #141414 !important; }
+    50% { background-color: rgb(17, 88, 85) !important; }
+    100% { background-color: #141414 !important; }
+}

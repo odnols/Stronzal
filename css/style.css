@@ -7,18 +7,19 @@ body {
     margin: 0;
     font-family: sans-serif;
     background-color: black;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 .top-bar{
     width: 100%;
     height: 50px;
-    background: #141414;
+    background-color: #141414;
     color: #888;
     line-height: 30px;
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     z-index: 3;
     box-shadow: 0px 0px 15px black;
+    animation: favorita_faixa 2s !important;
 }
 .player-controls{
     padding-left: 4% !important;
@@ -69,7 +70,7 @@ body {
     background-color: lightseagreen;
     height: 4px;
     border-radius: 5px;
-    width: 20%;
+    width: 0%;
     transition: width .1s;
 }
 a{
@@ -91,7 +92,6 @@ a:hover{
     float: left !important;
 }
 #jplayer_volume_bar_value{
-    width: 20%;
     z-index: 5 !important;
     left: 5%;
     transition: width .2s;
@@ -144,12 +144,20 @@ a:hover{
     margin-top: 10px;
     float: right;
 }
+#painel_infos{
+    width: 300px;
+    float: left;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 2;
+    position: absolute;
+}
 #infos_faixa{
     width: 300px;
     float: left;
     height: 300px;
     background-color: rgba(0, 0, 0, .7);
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     z-index: 2;
     color: white;
@@ -179,6 +187,7 @@ a:hover{
 .nome_artista_pl{
     font-weight: bold;
     color: white;
+    float: left;
 }
 .img_cover{
     image-rendering: pixelated;
@@ -194,6 +203,13 @@ a:hover{
 #nome_faixa, .nome_faixa_pl{
     color:rgb(163, 163, 163);
     transition: all .2s !important;
+    float: left;
+}
+.nome_faixa_pl{
+    width: 50%;
+    height: 16px;
+    overflow: hidden;
+    max-height: 30px !important;
 }
 #stronzal{
     color: white;
@@ -210,6 +226,7 @@ a:hover{
     border-radius: 5px;
     width: 98%;
     overflow: hidden;
+    max-height: 40px;
     height: 40px;
 }
 .item_playlist:hover{
@@ -240,4 +257,25 @@ a:hover{
 .barra_4{
     animation-delay: 500ms;
     animation: tocando_agora2 1.2s infinite;
+}
+.curtir_faixa{
+    float: right;
+    padding-right: 5px;
+    margin-top: -15px;
+}
+.faixa_curtida{
+    color: lightseagreen;
+    filter: drop-shadow(0px 0px 3px lightseagreen)
+}
+.faixa_n_curtida{
+    color: #888;
+}
+#buttons_nav{
+    padding-left: 15px;
+    width: 300px;
+    padding-top: 20%;
+}
+.icons_nav{
+    padding-right: 10px;
+    color: lightseagreen;
 }
