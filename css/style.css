@@ -131,7 +131,7 @@ a:hover{
     background-color: rgba(0, 0, 0, .7);
     position: absolute;
     width: 25%;
-    height: 92%;
+    height: 93%;
     right: 0px;
     top: 0px;
     z-index: 2;
@@ -169,7 +169,7 @@ a:hover{
     overflow: hidden !important;
     float: left;
 }
-.numero_faixa{
+.numero_faixa, .numero_faixa_cr{
     float: left;
     width: 50px;
     text-align: right;
@@ -179,10 +179,12 @@ a:hover{
 }
 .player-display {
     position: fixed;
-    width: 300px;
+    width: 285px;
     padding-top: 195px;
     padding-left: 15px;
     height: 100%;
+    /* background: rgb(0,0,0); */
+/* background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(2,34,26,0.8631827731092436) 19%, rgba(0,212,255,0) 100%); */
 }
 .nome_artista_pl{
     font-weight: bold;
@@ -190,7 +192,6 @@ a:hover{
     float: left;
 }
 .img_cover{
-    image-rendering: pixelated;
     float: left;
     padding-right: 15px;
     width: 40px;
@@ -232,7 +233,7 @@ a:hover{
 .item_playlist:hover{
     background-color: rgba(110, 110, 110, 0.7);
 }
-.playing_now{
+.playing_now, .playing_now_cr{
     display: none;
     margin-left: 30px;
     width: 20px;
@@ -294,13 +295,19 @@ a:hover{
     padding-left: 27%;
     text-shadow: 0px 0px 2px black;
 }
-#faixas_curtidas_lista, #albuns_curtidos_lista{
-    padding-top: 1%;
-    padding-left: 25% !important;
+#faixas_curtidas_lista, #lista_biblioteca_pessoal{
+    margin-left: 25% !important;
     width: 40%;
+    margin-bottom: 150px !important;
 }
-/* #lista_albuns_curtidos,  */
-#lista_faixas_curtidas, #biblioteca_user, #pagina_inicial{
+#lista_biblioteca_pessoal{
+    width: 55%;
+    margin-left: 20% !important;
+    position: absolute;
+    padding-bottom: 100px;
+}
+/* #biblioteca_user */
+#lista_albuns_curtidos, #lista_faixas_curtidas, #pagina_inicial{
     display: none;
 }
 .item_album_link{

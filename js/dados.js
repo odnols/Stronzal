@@ -8,10 +8,10 @@ if(typeof faixas_c_historico !== "undefined"){
     faixas_c_historico = faixas_c_historico.split(",");
 
     for(let i = 0; i < faixas_c_historico.length; i++){
-        faixas_curtidas.push(parseInt(faixas_c_historico[i]))
+        faixas_curtidas.push(faixas_c_historico[i]);
     }
 
-    if(isNaN(faixas_curtidas[0]) && faixas_curtidas.length === 1)
+    if(faixas_curtidas[0] === '' && faixas_curtidas.length === 1)
         faixas_curtidas = [];
 }
 
