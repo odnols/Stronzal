@@ -40,3 +40,7 @@ if(typeof repeat !== "undefined"){
     else
         prev_repeat[0].style.color = "rgb(105, 105, 105)";
 }
+
+// Horário
+const horario = new Date();
+document.getElementById("time_set").innerHTML = horario.getHours() >= 12 && horario.getHours() < 18 ? "Boa tarde" : horario.getHours() >= 18 || horario.getHours() < 6 ? "Boa noite" : "Bom dia";

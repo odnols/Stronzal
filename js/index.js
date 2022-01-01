@@ -2,61 +2,18 @@ var playItem = 0;
 var faixas_tocadas = [];
 var vol_anterior = 0;
 var playlistAtiva = 0;
+
+var playlist_exibe = 0;
+
 var minhaPlayList = [
     {id: 539, mp3:"songs/238425/1.mp3", album: "238425", name:"Skyfall"}
 ];
 
-var owners = {
-    8347283 : "Admiral James T.",
-    1723349 : "Adele",
-    4184959 : "C418",
-    8553569 : "Supertramp",
-    2938356 : "Boney M.",
-    3945834 : "Tears For Fears"
-}
-
-var albuns = {
-    283472 : {
-        cover : "https://f4.bcbits.com/img/a3559269778_10.jpg",
-        name : "Train Fever Soundtrack",
-        likes : 0,
-        owner : 8347283
-    },
-    238425 : {
-        cover : "https://upload.wikimedia.org/wikipedia/pt/0/09/Capa_de_Skyfall.jpg",
-        name : "Skyfall",
-        likes : 0,
-        owner : 1723349
-    },
-    418854 : {
-        cover : "https://i.scdn.co/image/ab67616d0000b2734cf0b29eb06a92aa96acae64",
-        name : "Minecraft - Volume Beta",
-        likes : 0,
-        owner : 4184959
-    },
-    945345 : {
-        cover : "https://upload.wikimedia.org/wikipedia/pt/c/cf/Supertramp_-_Breakfast_in_America_%281979%29.jpg",
-        name : "Breakfast in America",
-        likes : 0,
-        owner : 8553569
-    },
-    485345 : {
-        cover : "https://is3-ssl.mzstatic.com/image/thumb/Music124/v4/d9/7d/8d/d97d8df4-d396-92b4-a68d-916718a9d454/dj.vmtarinh.jpg/1200x1200bf-60.jpg",
-        name : "Nightflight to Venus",
-        likes : 0,
-        owner : 2938356
-    },
-    953452 : {
-        cover : "https://i.scdn.co/image/ab67616d0000b2739565c4df27be4aee5edc8009",
-        name : "Songs From The Big Chair",
-        likes : 0,
-        owner : 3945834
-    }
-}
-
 function preview_playlist(){
 
     document.getElementById("faixas_pl").innerHTML = "";
+
+    document.getElementById("faixas_pl").innerHTML += `<h1 id="playlist_name">${albuns[minhaPlayList[0]["album"]]["name"]}</h1>`;
 
     for(let i = 0; i < minhaPlayList.length; i++){
 
@@ -142,6 +99,13 @@ $("#jplayer_pause").click(function() {
 $("#btn_pagina_inicial").click(function() {
     esconde_tudo();
     $("#pagina_inicial").show();
+    document.getElementById("playlist").style.animation = "esconde_playlist 1s";
+
+    playlist_exibe = 0;
+
+    setTimeout(() => {
+        document.getElementById("playlist").style.right = "-50%";
+    }, 800);
 });
 
 $("#btn_biblioteca").click(function() {
@@ -193,6 +157,7 @@ function esconde_tudo(){
 // Método interno de montagem e exibição da playlist
 function exibirPlayList() {
     $("#jplayer_playlist ul").empty();
+
     for(let i = 0; i < minhaPlayList.length; i++) {
         var listItem = (i == minhaPlayList.length-1) ? "<li class='jplayer_playlist_ultimo_item'>" : "<li>";
         
@@ -428,6 +393,16 @@ function carrega_playlist(id_album){
 
     minhaPlayList = dados_albuns(id_album);    
     preview_playlist();
+
+    if(playlist_exibe == 0){
+        document.getElementById("playlist").style.animation = "mostra_playlist 1s";
+
+        setTimeout(() => {
+            document.getElementById("playlist").style.right = "19px";
+        }, 900);
+
+        playlist_exibe = 1;
+    }
 }
 
 function musicaCurtida(indice_curtida, id_faixa, album){

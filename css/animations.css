@@ -19,3 +19,11 @@
     50% { background-color: rgb(17, 88, 85) !important; }
     100% { background-color: #141414 !important; }
 }
+@keyframes esconde_playlist {
+    from { right: 19px; }
+    to { right: -50%; }
+}
+@keyframes mostra_playlist {
+    from { right: -50%; }
+    to { right: 19px; }
+}
