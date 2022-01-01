@@ -22,16 +22,11 @@ body {
     animation: favorita_faixa 2s !important;
 }
 .player-controls{
-    padding-left: 4% !important;
+    margin-left: 4% !important;
 }
 .icon_control{
     padding: 10px;
 }
-/* .icn_ctrl{ */
-    /* width: 10px !important; */
-    /* height: 10px !important; */
-
-/* } */
 .icons_secundarios{
     color: rgb(105, 105, 105);
 }
@@ -140,9 +135,22 @@ a:hover{
 }
 .volume_control{
     width: 10%;
-    margin-right: 20px;
-    margin-top: 10px;
+    margin-right: 12%;
+    padding-right: 10px;
+    margin-top: 9px;
     float: right;
+}
+.fa-volume-down{
+    margin-top: 3px;
+}
+.fa-arrow-right, .fa-arrow-left{
+    position: fixed;
+    right: 0px;
+    margin-top: 12px;
+    margin-right: 20px;
+}
+#recolher_playlist{
+    display: none;
 }
 #painel_infos{
     width: 300px;
@@ -164,8 +172,8 @@ a:hover{
     animation: puxa_infos_faixa .5s;
 }
 #capa_album{
-    max-width: 300px;
-    max-height: 300px;
+    width: 300px;
+    height: 300px;
     overflow: hidden !important;
     float: left;
 }
@@ -183,12 +191,11 @@ a:hover{
     padding-top: 195px;
     padding-left: 15px;
     height: 100%;
-    /* background: rgb(0,0,0); */
-/* background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(2,34,26,0.8631827731092436) 19%, rgba(0,212,255,0) 100%); */
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(2,34,26,0.8631827731092436) 19%, rgba(0,212,255,0) 100%);
 }
 .nome_artista_pl{
-    font-weight: bold;
-    color: white;
+    color: rgb(163, 163, 163);
     float: left;
 }
 .img_cover{
@@ -202,13 +209,16 @@ a:hover{
     font-weight: bold;
 }
 #nome_faixa, .nome_faixa_pl{
-    color:rgb(163, 163, 163);
+    color: rgb(163, 163, 163);
+    font-weight: bold;
+    height: 16px;
     transition: all .2s !important;
     float: left;
 }
 .nome_faixa_pl{
+    color: white !important;
     width: 50%;
-    height: 16px;
+    height: 17px;
     overflow: hidden;
     max-height: 30px !important;
 }
@@ -280,7 +290,7 @@ a:hover{
     padding-right: 10px;
     color: lightseagreen;
 }
-#faixas_curtidas{
+#bg_stronzal{
     position: fixed;
     width: 100%;
     height: 100%;
@@ -295,19 +305,20 @@ a:hover{
     padding-left: 27%;
     text-shadow: 0px 0px 2px black;
 }
-#faixas_curtidas_lista, #lista_biblioteca_pessoal{
+#lista_faixas_curtidas, #lista_biblioteca_pessoal, #lista_playlists_criadas{
     margin-left: 25% !important;
     width: 40%;
     margin-bottom: 150px !important;
+    transition: width 1s;
 }
 #lista_biblioteca_pessoal{
-    width: 55%;
+    width: 70%;
     margin-left: 20% !important;
     position: absolute;
     padding-bottom: 100px;
 }
 /* #biblioteca_user */
-#lista_albuns_curtidos, #lista_faixas_curtidas, #pagina_inicial{
+#playlists_criadas, #faixas_curtidas, #pagina_inicial{
     display: none;
 }
 .item_album_link{
@@ -331,4 +342,9 @@ a:hover{
 #playlist_name{
     color: white;
     padding-left: 20px;
+}
+.add_faixa_playlist{
+    float: left;
+    margin-left: 5px;
+    margin-top: 6px;
 }

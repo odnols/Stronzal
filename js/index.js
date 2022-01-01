@@ -9,11 +9,14 @@ var minhaPlayList = [
     {id: 539, mp3:"songs/238425/1.mp3", album: "238425", name:"Skyfall"}
 ];
 
-function preview_playlist(){
+function preview_playlist(nome_playlist){
 
     document.getElementById("faixas_pl").innerHTML = "";
 
-    document.getElementById("faixas_pl").innerHTML += `<h1 id="playlist_name">${albuns[minhaPlayList[0]["album"]]["name"]}</h1>`;
+    if(typeof nome_playlist == "undefined")
+        document.getElementById("faixas_pl").innerHTML += `<h1 id="playlist_name">${albuns[minhaPlayList[0]["album"]]["name"]}</h1>`;
+    else
+        document.getElementById("faixas_pl").innerHTML += `<h1 id="playlist_name">${nome_playlist}</h1>`;
 
     for(let i = 0; i < minhaPlayList.length; i++){
 
@@ -25,6 +28,10 @@ function preview_playlist(){
         document.getElementById("faixas_pl").innerHTML += `<br>
 
         <div class="item_playlist" id="faixa_scroll_0x${i}">
+            <a href="#" class="add_faixa_playlist" onclick="add_playlist()">
+                <i class="fa-2x fas fa-ellipsis-v"></i>
+            </a>
+
             <a href="#" onclick='mudarPlayList(${i})'>
                 
                 <span class="numero_faixa num_faixa">${i + 1}</span>
@@ -37,8 +44,8 @@ function preview_playlist(){
                 
                 <img class="img_cover" src="${albuns[minhaPlayList[i]["album"]]["cover"]}">
 
-                <span class="nome_artista_pl">${owners[albuns[minhaPlayList[i]["album"]]["owner"]]}</span><br>
-                <span class="nome_faixa_pl">${minhaPlayList[i]["name"]}</span>
+                <span class="nome_faixa_pl">${minhaPlayList[i]["name"]}</span><br>
+                <span class="nome_artista_pl">${owners[albuns[minhaPlayList[i]["album"]]["owner"]]}</span>
             </a>
 
             ${faixa_curtida}
@@ -73,86 +80,6 @@ $("#jquery_jplayer").jPlayer({
 .jPlayer("onSoundComplete", function() {
     playListProximo();
 });
-
-// Captura o evento de clique para o botão de anterior
-$("#jplayer_anterior").click(function() {
-    playListAnterior();
-    $(this).blur();
-    return false;
-});
-
-// Captura o evento de clique para o botão de próximo
-$("#jplayer_proximo").click(function() {
-    playListProximo();
-    $(this).blur();
-    return false;
-});
-
-$("#jplayer_play").click(function() {
-    tocando_agora(playItem, "playing_now", "num_faixa");
-});
-
-$("#jplayer_pause").click(function() {
-    tocando_agora("auto");
-});
-
-$("#btn_pagina_inicial").click(function() {
-    esconde_tudo();
-    $("#pagina_inicial").show();
-    document.getElementById("playlist").style.animation = "esconde_playlist 1s";
-
-    playlist_exibe = 0;
-
-    setTimeout(() => {
-        document.getElementById("playlist").style.right = "-50%";
-    }, 800);
-});
-
-$("#btn_biblioteca").click(function() {
-    esconde_tudo();
-    $("#biblioteca_user").show();
-});
-
-$("#btn_faixas").click(function() {
-    esconde_tudo();
-    $("#lista_faixas_curtidas").show();
-});
-
-$("#btn_playlists").click(function() {
-    esconde_tudo();
-    $("#lista_albuns_curtidos").show();
-});
-
-$("#jplayer_random").click(function() {
-    aleatorio = aleatorio == 0 ? 1 : 0;
-    let prev_random = document.getElementsByClassName("status_random");
-
-    if(aleatorio)
-        prev_random[0].style.color = "lightseagreen";
-    else
-        prev_random[0].style.color = "rgb(105, 105, 105)";
-
-    localStorage.setItem('random_stronzal', aleatorio);
-});
-
-$("#jplayer_repeat").click(function() {
-    repeteco = repeteco == 0 ? 1 : 0;
-    let prev_repeat = document.getElementsByClassName("status_repeteco");
-
-    if(repeteco)
-        prev_repeat[0].style.color = "lightseagreen";
-    else
-        prev_repeat[0].style.color = "rgb(105, 105, 105)";
-
-    localStorage.setItem('repeteco_stronzal', repeteco);
-});
-
-function esconde_tudo(){
-    $("#pagina_inicial").hide();
-    $("#biblioteca_user").hide();
-    $("#lista_faixas_curtidas").hide();
-    $("#lista_albuns_curtidos").hide();
-}
 
 // Método interno de montagem e exibição da playlist
 function exibirPlayList() {
@@ -305,7 +232,7 @@ function desliga_som(){
 
 function atualiza_faixas_curtidas(){
 
-    let lista_faixas = document.getElementById("faixas_curtidas_lista");
+    let lista_faixas = document.getElementById("lista_faixas_curtidas");
     lista_faixas.innerHTML = "";
     let titl = document.getElementsByClassName("musicas_curtidas");
 
@@ -340,6 +267,11 @@ function atualiza_faixas_curtidas(){
         lista_faixas.innerHTML += `<br>
 
         <div class="item_playlist" id="faixa_scroll_0x${i}">
+            
+            <a href="#" class="add_faixa_playlist" onclick="add_playlist()">
+                <i class="fa-2x fas fa-ellipsis-v"></i>
+            </a>
+
             <a href="#" onclick='musicaCurtida(${i}, ${id_faixa}, ${album_faixa})'>
                 
                 <span class="numero_faixa_cr num_faixa_cr">${i + 1}</span>
@@ -352,8 +284,8 @@ function atualiza_faixas_curtidas(){
                 
                 <img class="img_cover" src="${albuns[album_faixa]["cover"]}">
 
-                <span class="nome_artista_pl">${owners[albuns[album_faixa]["owner"]]}</span><br>
-                <span class="nome_faixa_pl">${nome_faixa}</span>
+                <span class="nome_faixa_pl">${nome_faixa}</span><br>
+                <span class="nome_artista_pl">${owners[albuns[album_faixa]["owner"]]}</span>
             </a>
 
             ${faixa_curtida}
@@ -403,6 +335,8 @@ function carrega_playlist(id_album){
 
         playlist_exibe = 1;
     }
+
+    sinc_botao_playlist(1);
 }
 
 function musicaCurtida(indice_curtida, id_faixa, album){
