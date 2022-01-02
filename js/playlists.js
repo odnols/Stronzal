@@ -45,11 +45,63 @@ function constroi_playlist(id_playlist){
             if(dados_album[key]["id"] == playlists[id_playlist]["faixas"][i])
                 minhaPlayList_interna.push(dados_album[key]);
         });
-
     }
 
-    minhaPlayList = minhaPlayList_interna;
-    preview_playlist(playlists[id_playlist]["name"]);
+    exibe_itens_playlist(minhaPlayList_interna, id_playlist);
+    sinc_botao_playlist(1);
+}
+
+sincroniza_playlists();
+
+function exibe_itens_playlist(dados_album, id_playlist){
+
+    const content_faixas_playlist = document.getElementById("content_faixas_playlist");
+    esconde_tudo();
+
+    $("#faixas_playlist").show();
+
+    nome_artista_album = "Slondo"
+
+    content_faixas_playlist.innerHTML = `<div id="painel_album"><a href="#"><img id="img_capa_album" src="${playlists[id_playlist]["cover"]}"></a><h1 id="nome_playlist_album">${playlists[id_playlist]["name"]}</h1><span id="criador_playlist_album">${nome_artista_album}</span></div></a>`;
+
+    console.log(dados_album);
+
+    let i = 0;
+    Object.keys(dados_album).map(function(key) {
+
+        let faixa_curtida = `<i class="far fa-heart fa-2x curtir_faixa faixa_n_curtida" onclick="curtir_faixa(${dados_album[key]["id"]}, ${dados_album[key]["album"]})"></i>`;
+
+        if(faixas_curtidas.includes(dados_album[key]["id"]))
+            faixa_curtida = `<i class="fas fa-heart fa-2x curtir_faixa faixa_curtida" onclick="curtir_faixa(${dados_album[key]["id"]}, ${dados_album[key]["album"]})"></i>`;
+
+        content_faixas_playlist.innerHTML += `<br>
+
+        <div class="item_playlist" id="faixa_scroll_0x${dados_album[key]["id"]}">
+            
+            <a href="#" class="add_faixa_playlist" onclick="add_playlist()">
+                <i class="fa-2x fas fa-ellipsis-v"></i>
+            </a>
+
+            <a href="#" onclick='musicaCurtida(${i}, ${dados_album[key]["id"]}, ${dados_album[key]["album"]})'>
+                
+                <span class="numero_faixa_cr num_faixa_cr">${i + 1}</span>
+                <div class="numero_faixa_cr playing_now_cr">
+                    <span class="barra_1"></span>
+                    <span class="barra_2"></span>
+                    <span class="barra_3"></span>
+                    <span class="barra_4"></span>
+                </div>
+                
+                <span class="nome_faixa_pl">${dados_album[key]["name"]}</span><br>
+                <span class="nome_artista_pl">${owners[albuns[dados_album[key]["album"]]["owner"]]}</span>
+            </a>
+
+            ${faixa_curtida}
+        </div>
+        `;
+
+        i++;
+    });
 
     if(playlist_exibe == 0){
         document.getElementById("playlist").style.animation = "mostra_playlist 1s";
@@ -63,5 +115,3 @@ function constroi_playlist(id_playlist){
 
     sinc_botao_playlist(1);
 }
-
-sincroniza_playlists();

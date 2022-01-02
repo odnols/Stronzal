@@ -5,7 +5,10 @@ var owners = {
     8553569 : "Supertramp",
     2938356 : "Boney M.",
     3945834 : "Tears For Fears",
-    2382932 : "Level 42"
+    2382932 : "Level 42",
+    8345734 : "Simply Red",
+    2987293 : "Almost monday",
+    2388482 : "Simple Minds"
 }
 
 var albuns = {
@@ -62,6 +65,24 @@ var albuns = {
         name : "World Machine",
         likes : 0,
         owner : 2382932
+    },
+    586453 : {
+        cover : "https://m.media-amazon.com/images/I/516xP6lT5oL._SX450_.jpg",
+        name : "Stars",
+        likes : 0,
+        owner : 8345734
+    },
+    298528 : {
+        cover : "https://i.scdn.co/image/ab67616d0000b27344ad2bbb75421d124e5310ce",
+        name : "cool enough",
+        likes : 0,
+        owner : 2987293
+    },
+    485346 : {
+        cover : "https://images-na.ssl-images-amazon.com/images/I/71FES3n3yGL.jpg",
+        name : "Celebrate (Greatest Hits / Expanded Edition)",
+        likes : 0,
+        owner : 2388482
     }
 }
 
@@ -143,6 +164,22 @@ function dados_albuns(id_album){
                 {id: 396, mp3: "songs/348954/1.mp3", album: "348954", name: "Something About You"}
             ];
         break;
+        case 586453:
+            album = [
+                {id: 385, mp3: "songs/586453/1.mp3", album: "586453", name: "Something Got Me Started"},
+                {id: 386, mp3: "songs/586453/2.mp3", album: "586453", name: "Wonderland"}
+            ];
+        break;
+        case 298528:
+            album = [
+                {id: 239, mp3: "songs/298528/1.mp3", album: "298528", name: "cool enough"}
+            ];
+        break;
+        case 485346:
+            album = [
+                {id: 485, mp3: "songs/485346/1.mp3", album: "485346", name: "Don't You (Forget About Me)"}
+            ];
+        break;
     }
 
     return album;
@@ -157,5 +194,7 @@ var album_static = {
     945345 : [459, 458],
     418854 : [844, 845, 846, 847, 848, 849, 850, 851, 852],
     238425 : [539],
-    283472 : [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117]
+    283472 : [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117],
+    586453 : [385, 386],
+    298528 : [239]
 }

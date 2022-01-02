@@ -305,7 +305,7 @@ a:hover{
     padding-left: 27%;
     text-shadow: 0px 0px 2px black;
 }
-#lista_faixas_curtidas, #lista_biblioteca_pessoal, #lista_playlists_criadas{
+#lista_faixas_curtidas, #lista_biblioteca_pessoal, #lista_playlists_criadas, #content_faixas_playlist{
     margin-left: 25% !important;
     width: 40%;
     margin-bottom: 150px !important;
@@ -317,9 +317,12 @@ a:hover{
     position: absolute;
     padding-bottom: 100px;
 }
-/* #biblioteca_user */
-#playlists_criadas, #faixas_curtidas, #pagina_inicial{
+/* #faixas_playlist*/
+#playlists_criadas, #faixas_curtidas, #pagina_inicial, #biblioteca_user{
     display: none;
+}
+#content_faixas_playlist{
+    width: 45%;
 }
 .item_album_link{
     color: white;
@@ -347,4 +350,27 @@ a:hover{
     float: left;
     margin-left: 5px;
     margin-top: 6px;
+}
+#painel_album{
+    width: 100%;
+    margin-top: 20px;
+    height: 250px;
+    margin-bottom: 40px;
+}
+#img_capa_album{
+    width: 250px;
+    height: 250px;
+    float: left;
+    box-shadow: 0px 0px 15px black;
+}
+#nome_playlist_album{
+    padding-top: 10%;
+    padding-left: 40%;
+    color: white;
+}
+#criador_playlist_album{
+    font-size: 25px;
+    padding-left: 25px;
+    color:rgb(177, 177, 177);
+    text-shadow: 0px 0px 15px black;
 }

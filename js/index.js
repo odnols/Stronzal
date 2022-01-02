@@ -303,13 +303,13 @@ function atualiza_albuns_curtidos(){
     let titl = document.getElementsByClassName("albuns_curtidos");
 
     if(faixas_curtidas.length < 1){
-        titl[0].innerHTML = "Você ainda não curtiu nenhum albúm <i class='fas fa-heart-broken'></i>";
+        titl[0].innerHTML = "Você ainda não curtiu nenhum álbum <i class='fas fa-heart-broken'></i>";
         // return
     }else
-        titl[0].innerHTML = "Seus albúns curtidos";
+        titl[0].innerHTML = "Seus álbuns curtidos";
 
     Object.keys(albuns).map(function(key) {
-        lista_albuns.innerHTML += `<a href="#" class='item_album_link' onclick='carrega_playlist(${key})'><div class='item_album_curtido item_album_curtido_${key}'>
+        lista_albuns.innerHTML += `<a href="#" class='item_album_link' onclick='exibe_itens_albuns(${key})'><div class='item_album_curtido item_album_curtido_${key}'>
             <h3 class='nome_item_album_curtido'>${albuns[key]["name"]}</h3>
         </div></a>`;
 
@@ -321,7 +321,7 @@ function atualiza_albuns_curtidos(){
 
 atualiza_albuns_curtidos();
 
-function carrega_playlist(id_album){
+function carrega_playlist(id_album, tocador){
 
     minhaPlayList = dados_albuns(id_album);    
     preview_playlist();
@@ -337,6 +337,9 @@ function carrega_playlist(id_album){
     }
 
     sinc_botao_playlist(1);
+
+    if(tocador)
+        mudarPlayList(0);
 }
 
 function musicaCurtida(indice_curtida, id_faixa, album){
@@ -367,3 +370,71 @@ function musicaCurtida(indice_curtida, id_faixa, album){
 
     $("#jquery_jplayer").jPlayer("play"); 
 }
+
+function exibe_itens_albuns(id_album){
+
+    const content_faixas_playlist = document.getElementById("content_faixas_playlist");
+    esconde_tudo();
+
+    $("#faixas_playlist").show();
+
+    console.log(typeof albuns[id_album]);
+
+    if(typeof albuns[id_album] != "undefined")
+        nome_artista_album = owners[albuns[id_album]["owner"]];
+
+    content_faixas_playlist.innerHTML = `<div id="painel_album"><a href="#" onclick="carrega_playlist(${id_album}, true)"><img id="img_capa_album" src="${albuns[id_album]["cover"]}"></a><h1 id="nome_playlist_album">${albuns[id_album]["name"]}</h1><span id="criador_playlist_album">${nome_artista_album}</span></div></a>`;
+
+    const dados_album = dados_albuns(id_album);
+
+    let i = 0;
+    Object.keys(dados_album).map(function(key) {
+
+        let faixa_curtida = `<i class="far fa-heart fa-2x curtir_faixa faixa_n_curtida" onclick="curtir_faixa(${dados_album[key]["id"]}, ${id_album})"></i>`;
+
+        if(faixas_curtidas.includes(dados_album[key]["id"]))
+            faixa_curtida = `<i class="fas fa-heart fa-2x curtir_faixa faixa_curtida" onclick="curtir_faixa(${dados_album[key]["id"]}, ${id_album})"></i>`;
+
+        content_faixas_playlist.innerHTML += `<br>
+
+        <div class="item_playlist" id="faixa_scroll_0x${dados_album[key]["id"]}">
+            
+            <a href="#" class="add_faixa_playlist" onclick="add_playlist()">
+                <i class="fa-2x fas fa-ellipsis-v"></i>
+            </a>
+
+            <a href="#" onclick='musicaCurtida(${i}, ${dados_album[key]["id"]}, ${id_album})'>
+                
+                <span class="numero_faixa_cr num_faixa_cr">${i + 1}</span>
+                <div class="numero_faixa_cr playing_now_cr">
+                    <span class="barra_1"></span>
+                    <span class="barra_2"></span>
+                    <span class="barra_3"></span>
+                    <span class="barra_4"></span>
+                </div>
+                
+                <span class="nome_faixa_pl">${dados_album[key]["name"]}</span><br>
+                <span class="nome_artista_pl">${owners[albuns[id_album]["owner"]]}</span>
+            </a>
+
+            ${faixa_curtida}
+        </div>
+        `;
+
+        i++;
+    });
+
+    if(playlist_exibe == 0){
+        document.getElementById("playlist").style.animation = "mostra_playlist 1s";
+
+        setTimeout(() => {
+            document.getElementById("playlist").style.right = "19px";
+        }, 900);
+
+        playlist_exibe = 1;
+    }
+
+    sinc_botao_playlist(1);
+}
+
+exibe_itens_albuns(953452);

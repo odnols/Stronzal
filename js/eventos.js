@@ -128,4 +128,5 @@ function esconde_tudo(){
     $("#biblioteca_user").hide();
     $("#faixas_curtidas").hide();
     $("#playlists_criadas").hide();
+    $("#faixas_playlist").hide();
 }
