@@ -32,7 +32,7 @@ var albuns = {
     },
     945345 : {
         cover : "https://upload.wikimedia.org/wikipedia/pt/c/cf/Supertramp_-_Breakfast_in_America_%281979%29.jpg",
-        name : "Breakfast in America",
+        name : "Breakfast In America (Deluxe Edition)",
         likes : 0,
         owner : 8553569
     },
@@ -91,6 +91,11 @@ function dados_albuns(id_album){
     let album = [];
 
     switch(id_album){
+        case 238425:
+            album = [
+                {id: 539, mp3: "songs/238425/1.mp3", album: "238425", name: "Skyfall"}
+            ];
+        break;
         case 283472:
             album = [
                 {id: 101, mp3: "songs/283472/1.mp3", album: "283472", name: "Backbug"},
@@ -109,12 +114,12 @@ function dados_albuns(id_album){
                 {id: 114, mp3: "songs/283472/14.mp3", album: "283472", name: "Low Down"},
                 {id: 115, mp3: "songs/283472/15.mp3", album: "283472", name: "Lower East"},
                 {id: 116, mp3: "songs/283472/16.mp3", album: "283472", name: "Cricket Post"},
-                {id: 117, mp3: "songs/283472/17.mp3", album: "283472", name: "Disco (Train Fever Main Menu Theme)"}
-            ];
-        break;
-        case 238425:
-            album = [
-                {id: 539, mp3: "songs/238425/1.mp3", album: "238425", name: "Skyfall"}
+                {id: 117, mp3: "songs/283472/17.mp3", album: "283472", name: "Disco (Train Fever Main Menu Theme)"},
+                {id: 118, mp3: "songs/283472/18.mp3", album: "283472", name: "Cali One"},
+                {id: 119, mp3: "songs/283472/19.mp3", album: "283472", name: "Big Boss"},
+                {id: 120, mp3: "songs/283472/20.mp3", album: "283472", name: "Rumble Track"},
+                {id: 121, mp3: "songs/283472/21.mp3", album: "283472", name: "Cocoon"},
+                {id: 122, mp3: "songs/283472/22.mp3", album: "283472", name: "Harvest"}
             ];
         break;
         case 418854:
@@ -124,17 +129,45 @@ function dados_albuns(id_album){
                 {id: 846, mp3: "songs/418854/3.mp3", album: "418854", name: "Dead Voxel"},
                 {id: 847, mp3: "songs/418854/4.mp3", album: "418854", name: "Blind Spots"},
                 {id: 848, mp3: "songs/418854/5.mp3", album: "418854", name: "Flake"},
-                {id: 849, mp3: "songs/418854/6.mp3", album: "418854", name: "Concrete Halls"},
-                {id: 850, mp3: "songs/418854/7.mp3", album: "418854", name: "Moog City 2"},
+                {id: 849, mp3: "songs/418854/6.mp3", album: "418854", name: "Moog City 2"},
+                {id: 850, mp3: "songs/418854/7.mp3", album: "418854", name: "Concrete Halls"},
                 {id: 851, mp3: "songs/418854/8.mp3", album: "418854", name: "Mutation"},
                 {id: 852, mp3: "songs/418854/9.mp3", album: "418854", name: "Biome Fest"},
-                {id: 852, mp3: "songs/418854/10.mp3", album: "418854", name: "Haunt Muskie"}
+                {id: 853, mp3: "songs/418854/10.mp3", album: "418854", name: "Haunt Muskie"},
+                {id: 854, mp3: "songs/418854/11.mp3", album: "418854", name: "Warmth"},
+                {id: 855, mp3: "songs/418854/12.mp3", album: "418854", name: "Floating Trees"},
+                {id: 856, mp3: "songs/418854/13.mp3", album: "418854", name: "Aria Math"},
+                {id: 857, mp3: "songs/418854/14.mp3", album: "418854", name: "Kyoto"},
+                {id: 858, mp3: "songs/418854/15.mp3", album: "418854", name: "Ballad of the Cats"},
+                {id: 859, mp3: "songs/418854/16.mp3", album: "418854", name: "Taswell"},
+                {id: 860, mp3: "songs/418854/17.mp3", album: "418854", name: "Beginning 2"},
+                {id: 861, mp3: "songs/418854/18.mp3", album: "418854", name: "Dreidon"},
+                {id: 862, mp3: "songs/418854/19.mp3", album: "418854", name: "The End"},
+                {id: 863, mp3: "songs/418854/20.mp3", album: "418854", name: "Chirp"},
+                {id: 864, mp3: "songs/418854/21.mp3", album: "418854", name: "Wait"},
+                {id: 865, mp3: "songs/418854/22.mp3", album: "418854", name: "Mellohi"},
+                {id: 866, mp3: "songs/418854/23.mp3", album: "418854", name: "Stal"},
+                {id: 867, mp3: "songs/418854/24.mp3", album: "418854", name: "Strad"},
+                {id: 868, mp3: "songs/418854/25.mp3", album: "418854", name: "Eleven"},
+                {id: 869, mp3: "songs/418854/26.mp3", album: "418854", name: "Ward"},
+                {id: 870, mp3: "songs/418854/27.mp3", album: "418854", name: "Mall"},
+                {id: 871, mp3: "songs/418854/28.mp3", album: "418854", name: "Blocks"},
+                {id: 872, mp3: "songs/418854/29.mp3", album: "418854", name: "Far"},
+                {id: 873, mp3: "songs/418854/30.mp3", album: "418854", name: "Intro"}
             ];
         break;
         case 945345:
             album = [
-                {id: 459, mp3: "songs/945345/1.mp3", album: "945345", name: "Breakfast in America"},
-                {id: 458, mp3: "songs/945345/2.mp3", album: "945345", name: "The Logical Song"}
+                {id: 458, mp3: "songs/945345/1.mp3", album: "945345", name: "Gone Hollywood"},
+                {id: 459, mp3: "songs/945345/2.mp3", album: "945345", name: "The Logical Song"},
+                {id: 460, mp3: "songs/945345/3.mp3", album: "945345", name: "Goodbye Stranger"},
+                {id: 461, mp3: "songs/945345/4.mp3", album: "945345", name: "Breakfast in America"},
+                {id: 462, mp3: "songs/945345/5.mp3", album: "945345", name: "Oh Darling"},
+                {id: 463, mp3: "songs/945345/6.mp3", album: "945345", name: "Take The Long Way Home"},
+                {id: 464, mp3: "songs/945345/7.mp3", album: "945345", name: "Lord Is It Mine"},
+                {id: 465, mp3: "songs/945345/8.mp3", album: "945345", name: "Just Another Nervous Wreck"},
+                {id: 466, mp3: "songs/945345/9.mp3", album: "945345", name: "Casual Conversations"},
+                {id: 467, mp3: "songs/945345/10.mp3", album: "945345", name: "Child Of Vision"}
             ];
         break;
         case 485345:
@@ -185,16 +218,17 @@ function dados_albuns(id_album){
     return album;
 }
 
+// Usado para localizar as musicas nas playlists de forma rápida
 var album_static = {
-    348954 : [395],
-    348953 : [396],
+    348954 : [396],
+    348953 : [395],
     583459 : [986],
     953452 : [495, 496],
     485345 : [234, 235],
-    945345 : [459, 458],
-    418854 : [844, 845, 846, 847, 848, 849, 850, 851, 852],
+    945345 : [458, 459, 460, 461, 462, 463, 464, 465, 466, 467],
+    418854 : [844, 845, 846, 847, 848, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 873],
     238425 : [539],
-    283472 : [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117],
+    283472 : [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122],
     586453 : [385, 386],
     298528 : [239],
     485346 : [485]

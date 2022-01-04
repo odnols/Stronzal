@@ -6,6 +6,12 @@ var playlists = {
         name : "Academia",
         cover : "https://thumbs.gfycat.com/OrneryLegitimateJackal-size_restricted.gif",
         likes : 0
+    },
+    4958935 : {
+        faixas : [396, 395, 496, 459, 485, 112, 458, 539],
+        name : "Rochelle's",
+        cover : "https://adrianojrodrigues.files.wordpress.com/2011/08/chris2.gif",
+        likes : 0
     }
 };
 
@@ -180,7 +186,9 @@ function carrega_playlist_pers(id_playlist) {
     minhaPlayList = dados_album;
     sinc_botao_playlist(1);
     preview_playlist(playlists[id_playlist]["name"]);
-    mudarPlayList(0);
+
+    let inicia = aleatorio != 1 ? 0 : Math.round((dados_playlist_ativa.length - 1) * Math.random());
+    mudarPlayList(inicia);
 
     $("#jquery_jplayer").jPlayer("play"); 
 }

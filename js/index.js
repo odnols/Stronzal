@@ -364,8 +364,10 @@ function carrega_playlist(id_album, tocador){
 
     sinc_botao_playlist(1);
 
-    if(tocador)
-        mudarPlayList(0);
+    if(tocador){
+        let inicia = aleatorio != 1 ? 0 : Math.round((minhaPlayList.length - 1) * Math.random());
+        mudarPlayList(inicia);
+    }
 }
 
 function musicaCurtida(indice_curtida, id_faixa, album){
