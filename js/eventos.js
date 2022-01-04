@@ -13,7 +13,7 @@ $("#jplayer_proximo").click(function() {
 });
 
 $("#jplayer_play").click(function() {
-    tocando_agora(playItem, "playing_now", "num_faixa");
+    tocando_agora(id_faixa_atual);
 });
 
 $("#jplayer_pause").click(function() {
@@ -129,4 +129,9 @@ function esconde_tudo(){
     $("#faixas_curtidas").hide();
     $("#playlists_criadas").hide();
     $("#faixas_playlist").hide();
+}
+
+function sync_now_playing(id_faixa){
+
+    
 }

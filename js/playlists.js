@@ -1,3 +1,5 @@
+var dados_playlist_ativa = [];
+
 var playlists = {
     2842342 : {
         faixas : [111, 112, 113, 850, 851, 986, 395],
@@ -28,7 +30,7 @@ function sincroniza_playlists(){
     });
 }
 
-function constroi_playlist(id_playlist){
+function constroi_playlist(id_playlist, req_auto){
     
     minhaPlayList_interna = [];
 
@@ -47,13 +49,21 @@ function constroi_playlist(id_playlist){
         });
     }
 
+    if(req_auto)
+        return minhaPlayList_interna;
+
     exibe_itens_playlist(minhaPlayList_interna, id_playlist);
     sinc_botao_playlist(1);
 }
 
 sincroniza_playlists();
 
-function exibe_itens_playlist(dados_album, id_playlist){
+function exibe_itens_playlist(dados_playlist_ativa, id_playlist){
+
+    if(typeof id_playlist !== "undefined"){
+        id_playlist_ativa = id_playlist;
+        id_album_ativo = 0;
+    }
 
     const content_faixas_playlist = document.getElementById("content_faixas_playlist");
     esconde_tudo();
@@ -61,39 +71,36 @@ function exibe_itens_playlist(dados_album, id_playlist){
     $("#faixas_playlist").show();
 
     nome_artista_album = "Slondo"
-
-    content_faixas_playlist.innerHTML = `<div id="painel_album"><a href="#"><img id="img_capa_album" src="${playlists[id_playlist]["cover"]}"></a><h1 id="nome_playlist_album">${playlists[id_playlist]["name"]}</h1><span id="criador_playlist_album">${nome_artista_album}</span></div></a>`;
-
-    console.log(dados_album);
+    content_faixas_playlist.innerHTML = `<div id="painel_album"><a href="#" onclick="carrega_playlist_pers(${id_playlist})"><img id="img_capa_album" src="${playlists[id_playlist]["cover"]}"></a><h1 id="nome_playlist_album">${playlists[id_playlist]["name"]}</h1><span id="criador_playlist_album">${nome_artista_album}</span></div></a>`;
 
     let i = 0;
-    Object.keys(dados_album).map(function(key) {
+    Object.keys(dados_playlist_ativa).map(function(key) {
 
-        let faixa_curtida = `<i class="far fa-heart fa-2x curtir_faixa faixa_n_curtida" onclick="curtir_faixa(${dados_album[key]["id"]}, ${dados_album[key]["album"]})"></i>`;
+        let faixa_curtida = `<i class="far fa-heart fa-2x curtir_faixa faixa_n_curtida" onclick="curtir_faixa(${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})"></i>`;
 
-        if(faixas_curtidas.includes(dados_album[key]["id"]))
-            faixa_curtida = `<i class="fas fa-heart fa-2x curtir_faixa faixa_curtida" onclick="curtir_faixa(${dados_album[key]["id"]}, ${dados_album[key]["album"]})"></i>`;
+        if(faixas_curtidas.includes(`${dados_playlist_ativa[key]["id"]}:${dados_playlist_ativa[key]["album"]}`))
+            faixa_curtida = `<i class="fas fa-heart fa-2x curtir_faixa faixa_curtida" onclick="curtir_faixa(${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})"></i>`;
 
         content_faixas_playlist.innerHTML += `<br>
 
-        <div class="item_playlist" id="faixa_scroll_0x${dados_album[key]["id"]}">
+        <div class="item_playlist" id="faixa_scroll_0x${dados_playlist_ativa[key]["id"]}">
             
             <a href="#" class="add_faixa_playlist" onclick="add_playlist()">
                 <i class="fa-2x fas fa-ellipsis-v"></i>
             </a>
 
-            <a href="#" onclick='musicaCurtida(${i}, ${dados_album[key]["id"]}, ${dados_album[key]["album"]})'>
+            <a href="#" onclick='musicaCurtida(${i}, ${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})'>
                 
-                <span class="numero_faixa_cr num_faixa_cr">${i + 1}</span>
-                <div class="numero_faixa_cr playing_now_cr">
+                <span class="numero_faixa num_faixa_cr num_faixa_${dados_playlist_ativa[key]["id"]}">${i + 1}</span>
+                <div class="numero_faixa pl_now_anim playing_now_${dados_playlist_ativa[key]["id"]}">
                     <span class="barra_1"></span>
                     <span class="barra_2"></span>
                     <span class="barra_3"></span>
                     <span class="barra_4"></span>
                 </div>
                 
-                <span class="nome_faixa_pl">${dados_album[key]["name"]}</span><br>
-                <span class="nome_artista_pl">${owners[albuns[dados_album[key]["album"]]["owner"]]}</span>
+                <span class="nome_faixa_pl">${dados_playlist_ativa[key]["name"]}</span><br>
+                <span class="nome_artista_pl">${owners[albuns[dados_playlist_ativa[key]["album"]]["owner"]]}</span>
             </a>
 
             ${faixa_curtida}
@@ -114,4 +121,66 @@ function exibe_itens_playlist(dados_album, id_playlist){
     }
 
     sinc_botao_playlist(1);
+    tocando_agora(id_faixa_atual);
+}
+
+function atualiza_itens_playlist(id_playlist){
+    
+    const content_faixas_playlist = document.getElementById("content_faixas_playlist");
+
+    nome_artista_album = "Slondo"
+    content_faixas_playlist.innerHTML = `<div id="painel_album"><a href="#" onclick="carrega_playlist_pers(${id_playlist})"><img id="img_capa_album" src="${playlists[id_playlist]["cover"]}"></a><h1 id="nome_playlist_album">${playlists[id_playlist]["name"]}</h1><span id="criador_playlist_album">${nome_artista_album}</span></div></a>`;
+
+    let i = 0;
+    Object.keys(dados_playlist_ativa).map(function(key) {
+
+        let faixa_curtida = `<i class="far fa-heart fa-2x curtir_faixa faixa_n_curtida" onclick="curtir_faixa(${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})"></i>`;
+
+        if(faixas_curtidas.includes(`${dados_playlist_ativa[key]["id"]}:${dados_playlist_ativa[key]["album"]}`))
+            faixa_curtida = `<i class="fas fa-heart fa-2x curtir_faixa faixa_curtida" onclick="curtir_faixa(${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})"></i>`;
+
+        content_faixas_playlist.innerHTML += `<br>
+
+        <div class="item_playlist" id="faixa_scroll_0x${dados_playlist_ativa[key]["id"]}">
+            
+            <a href="#" class="add_faixa_playlist" onclick="add_playlist()">
+                <i class="fa-2x fas fa-ellipsis-v"></i>
+            </a>
+
+            <a href="#" onclick='musicaCurtida(${i}, ${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})'>
+                
+                <span class="numero_faixa num_faixa_cr num_faixa_${dados_playlist_ativa[key]["id"]}">${i + 1}</span>
+                <div class="numero_faixa pl_now_anim playing_now_${dados_playlist_ativa[key]["id"]}">
+                    <span class="barra_1"></span>
+                    <span class="barra_2"></span>
+                    <span class="barra_3"></span>
+                    <span class="barra_4"></span>
+                </div>
+                
+                <span class="nome_faixa_pl">${dados_playlist_ativa[key]["name"]}</span><br>
+                <span class="nome_artista_pl">${owners[albuns[dados_playlist_ativa[key]["album"]]["owner"]]}</span>
+            </a>
+
+            ${faixa_curtida}
+        </div>
+        `;
+
+        i++;
+    });
+    
+    sinc_botao_playlist(1);
+    tocando_agora(id_faixa_atual);
+}
+
+function carrega_playlist_pers(id_playlist) {
+
+    const dados_album = constroi_playlist(id_playlist, true);
+    dados_playlist_ativa = dados_album;
+
+    minhaPlayList = dados_album;
+    sinc_botao_playlist(1);
+    preview_playlist(playlists[id_playlist]["name"]);
+    mudarPlayList(0);
+
+    $("#jquery_jplayer").jPlayer("play"); 
 }

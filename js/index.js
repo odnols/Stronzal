@@ -1,4 +1,7 @@
 var playItem = 0;
+var id_faixa_atual = 0;
+var id_album_ativo = 0;
+var id_playlist_ativa = 0;
 var faixas_tocadas = [];
 var vol_anterior = 0;
 var playlistAtiva = 0;
@@ -13,7 +16,7 @@ function preview_playlist(nome_playlist){
 
     document.getElementById("faixas_pl").innerHTML = "";
 
-    if(typeof nome_playlist == "undefined")
+    if(typeof nome_playlist === "undefined")
         document.getElementById("faixas_pl").innerHTML += `<h1 id="playlist_name">${albuns[minhaPlayList[0]["album"]]["name"]}</h1>`;
     else
         document.getElementById("faixas_pl").innerHTML += `<h1 id="playlist_name">${nome_playlist}</h1>`;
@@ -34,8 +37,8 @@ function preview_playlist(nome_playlist){
 
             <a href="#" onclick='mudarPlayList(${i})'>
                 
-                <span class="numero_faixa num_faixa">${i + 1}</span>
-                <div class="numero_faixa playing_now">
+                <span class="numero_faixa num_faixa_cr num_faixa_${minhaPlayList[i]["id"]}">${i + 1}</span>
+                <div class="numero_faixa pl_now_anim playing_now_${minhaPlayList[i]["id"]}">
                     <span class="barra_1"></span>
                     <span class="barra_2"></span>
                     <span class="barra_3"></span>
@@ -133,8 +136,9 @@ function playListConfig(index) {
 
 function mudarPlayList(index) {
 
-    tocando_agora(index, "playing_now", "num_faixa");
     playListConfig(index);
+    tocando_agora(minhaPlayList[index]["id"]);
+    id_faixa_atual = minhaPlayList[index]["id"];
 
     let scrollDiv = document.getElementById("faixa_scroll_0x"+ index); // Scroll a playlist até a faixa atual
     scrollDiv.scrollIntoView({block: "center", behavior: "smooth"});
@@ -146,7 +150,7 @@ function mudarPlayList(index) {
 
     document.getElementById("capa_album").src = albuns[minhaPlayList[index]["album"]]["cover"];
 
-    $("#jquery_jplayer").jPlayer("play");    
+    $("#jquery_jplayer").jPlayer("play");
 }
 
 // Executa a próxima faixa
@@ -183,18 +187,31 @@ function playListAnterior() {
     mudarPlayList(faixa_tocada);
 }
 
-function tocando_agora(faixa_atual, alvo_1, alvo_2){
-    const tocando_agora = document.getElementsByClassName(alvo_1);
-    const num_faixa = document.getElementsByClassName(alvo_2);
+function tocando_agora(id_faixa){
 
-    for(let i = 0; i < tocando_agora.length; i++){ // Escondendo todos os itens
-        tocando_agora[i].style.display = "None";
-        num_faixa[i].style.display = "Block";
+    if(id_faixa !== "auto")
+        id_faixa_atual = id_faixa;
+
+    const esconde_num_faixa = document.getElementsByClassName(`num_faixa_${id_faixa}`);
+    const mostra_todas_faixas = document.getElementsByClassName("num_faixa_cr");
+
+    for(let i = 0; i < mostra_todas_faixas.length; i++){ // Mostra o indice de todas as faixas
+        mostra_todas_faixas[i].style.display = "Block";
     }
     
-    if(faixa_atual !== "auto"){
-        tocando_agora[faixa_atual].style.display = "Block";
-        num_faixa[faixa_atual].style.display = "None";
+    for(let i = 0; i < esconde_num_faixa.length; i++){ // Esconde as faixas que estão tocando
+        esconde_num_faixa[i].style.display = "None";
+    }
+
+    const encerra_animacao = document.getElementsByClassName("pl_now_anim");
+    const mostra_animacao = document.getElementsByClassName(`playing_now_${id_faixa}`);
+
+    for(let i = 0; i < encerra_animacao.length; i++){ // Escondendo todos as faixas
+        encerra_animacao[i].style.display = "None";
+    }
+    
+    for(let i = 0; i < mostra_animacao.length; i++){ // Ativa apenas as faixas corretas
+        mostra_animacao[i].style.display = "Block";
     }
 }
 
@@ -206,7 +223,6 @@ function curtir_faixa(faixa, album){
         faixas_curtidas.push(`${faixa}:${album}`);
     
     preview_playlist();
-    tocando_agora(playItem, "playing_now", "num_faixa");
 
     localStorage.setItem('faixas_curtidas', faixas_curtidas);
 
@@ -218,6 +234,12 @@ function curtir_faixa(faixa, album){
     }, 1000);
 
     atualiza_faixas_curtidas();
+
+    if(id_album_ativo !== 0)
+        atualiza_itens_album(id_album_ativo);
+
+    if(id_playlist_ativa !== 0)
+        atualiza_itens_playlist(id_playlist_ativa);
 }
 
 function desliga_som(){
@@ -231,6 +253,8 @@ function desliga_som(){
 }
 
 function atualiza_faixas_curtidas(){
+
+    tocando_agora(id_faixa_atual);
 
     let lista_faixas = document.getElementById("lista_faixas_curtidas");
     lista_faixas.innerHTML = "";
@@ -274,8 +298,8 @@ function atualiza_faixas_curtidas(){
 
             <a href="#" onclick='musicaCurtida(${i}, ${id_faixa}, ${album_faixa})'>
                 
-                <span class="numero_faixa_cr num_faixa_cr">${i + 1}</span>
-                <div class="numero_faixa_cr playing_now_cr">
+                <span class="numero_faixa num_faixa_cr num_faixa_${id_faixa}">${i + 1}</span>
+                <div class="numero_faixa pl_now_anim playing_now_${id_faixa}">
                     <span class="barra_1"></span>
                     <span class="barra_2"></span>
                     <span class="barra_3"></span>
@@ -323,6 +347,8 @@ atualiza_albuns_curtidos();
 
 function carrega_playlist(id_album, tocador){
 
+    tocando_agora(id_faixa_atual);
+
     minhaPlayList = dados_albuns(id_album);    
     preview_playlist();
 
@@ -366,19 +392,21 @@ function musicaCurtida(indice_curtida, id_faixa, album){
 
     document.getElementById("capa_album").src = albuns[album]["cover"];
 
-    tocando_agora(indice_curtida, "playing_now_cr", "num_faixa_cr");
-
+    tocando_agora(id_faixa);
     $("#jquery_jplayer").jPlayer("play"); 
 }
 
 function exibe_itens_albuns(id_album){
 
+    if(typeof id_album !== "undefined"){
+        id_album_ativo = id_album;
+        id_playlist_ativa = 0;
+    }
+    
     const content_faixas_playlist = document.getElementById("content_faixas_playlist");
     esconde_tudo();
 
     $("#faixas_playlist").show();
-
-    console.log(typeof albuns[id_album]);
 
     if(typeof albuns[id_album] != "undefined")
         nome_artista_album = owners[albuns[id_album]["owner"]];
@@ -391,8 +419,8 @@ function exibe_itens_albuns(id_album){
     Object.keys(dados_album).map(function(key) {
 
         let faixa_curtida = `<i class="far fa-heart fa-2x curtir_faixa faixa_n_curtida" onclick="curtir_faixa(${dados_album[key]["id"]}, ${id_album})"></i>`;
-
-        if(faixas_curtidas.includes(dados_album[key]["id"]))
+    
+        if(faixas_curtidas.includes(`${dados_album[key]["id"]}:${id_album}`))
             faixa_curtida = `<i class="fas fa-heart fa-2x curtir_faixa faixa_curtida" onclick="curtir_faixa(${dados_album[key]["id"]}, ${id_album})"></i>`;
 
         content_faixas_playlist.innerHTML += `<br>
@@ -405,8 +433,8 @@ function exibe_itens_albuns(id_album){
 
             <a href="#" onclick='musicaCurtida(${i}, ${dados_album[key]["id"]}, ${id_album})'>
                 
-                <span class="numero_faixa_cr num_faixa_cr">${i + 1}</span>
-                <div class="numero_faixa_cr playing_now_cr">
+                <span class="numero_faixa num_faixa_cr num_faixa_${dados_album[key]["id"]}">${i + 1}</span>
+                <div class="numero_faixa pl_now_anim playing_now_${dados_album[key]["id"]}">
                     <span class="barra_1"></span>
                     <span class="barra_2"></span>
                     <span class="barra_3"></span>
@@ -435,6 +463,58 @@ function exibe_itens_albuns(id_album){
     }
 
     sinc_botao_playlist(1);
+    tocando_agora(id_faixa_atual);
 }
 
 exibe_itens_albuns(953452);
+
+function atualiza_itens_album(id_album){
+
+    const content_faixas_playlist = document.getElementById("content_faixas_playlist");
+
+    if(typeof albuns[id_album] != "undefined")
+        nome_artista_album = owners[albuns[id_album]["owner"]];
+
+    content_faixas_playlist.innerHTML = `<div id="painel_album"><a href="#" onclick="carrega_playlist(${id_album}, true)"><img id="img_capa_album" src="${albuns[id_album]["cover"]}"></a><h1 id="nome_playlist_album">${albuns[id_album]["name"]}</h1><span id="criador_playlist_album">${nome_artista_album}</span></div></a>`;
+
+    const dados_album = dados_albuns(id_album);
+
+    let i = 0;
+    Object.keys(dados_album).map(function(key) {
+
+        let faixa_curtida = `<i class="far fa-heart fa-2x curtir_faixa faixa_n_curtida" onclick="curtir_faixa(${dados_album[key]["id"]}, ${id_album})"></i>`;
+    
+        if(faixas_curtidas.includes(`${dados_album[key]["id"]}:${id_album}`))
+            faixa_curtida = `<i class="fas fa-heart fa-2x curtir_faixa faixa_curtida" onclick="curtir_faixa(${dados_album[key]["id"]}, ${id_album})"></i>`;
+
+        content_faixas_playlist.innerHTML += `<br>
+
+        <div class="item_playlist" id="faixa_scroll_0x${dados_album[key]["id"]}">
+            
+            <a href="#" class="add_faixa_playlist" onclick="add_playlist()">
+                <i class="fa-2x fas fa-ellipsis-v"></i>
+            </a>
+
+            <a href="#" onclick='musicaCurtida(${i}, ${dados_album[key]["id"]}, ${id_album})'>
+                
+                <span class="numero_faixa num_faixa_cr num_faixa_${dados_album[key]["id"]}">${i + 1}</span>
+                <div class="numero_faixa pl_now_anim playing_now_${dados_album[key]["id"]}">
+                    <span class="barra_1"></span>
+                    <span class="barra_2"></span>
+                    <span class="barra_3"></span>
+                    <span class="barra_4"></span>
+                </div>
+                
+                <span class="nome_faixa_pl">${dados_album[key]["name"]}</span><br>
+                <span class="nome_artista_pl">${owners[albuns[id_album]["owner"]]}</span>
+            </a>
+
+            ${faixa_curtida}
+        </div>
+        `;
+
+        i++;
+    });
+
+    tocando_agora(id_faixa_atual);
+}

@@ -177,7 +177,7 @@ a:hover{
     overflow: hidden !important;
     float: left;
 }
-.numero_faixa, .numero_faixa_cr{
+.numero_faixa{
     float: left;
     width: 50px;
     text-align: right;
@@ -373,4 +373,9 @@ a:hover{
     padding-left: 25px;
     color:rgb(177, 177, 177);
     text-shadow: 0px 0px 15px black;
+}
+.pl_now_anim{
+    display: none;
+    padding-left: 30px;
+    width: 20px;
 }
