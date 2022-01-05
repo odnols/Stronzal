@@ -1,3 +1,5 @@
+var menu_configuracoes = 0;
+
 // Captura o evento de clique para o botão de anterior
 $("#jplayer_anterior").click(function() {
     playListAnterior();
@@ -51,12 +53,46 @@ $("#btn_playlists").click(function() {
     sincroniza_playlists();
 });
 
+$("#btn_abrir_configuracoes").click(function() {
+    
+    const config = document.getElementById("configuracoes");
+    
+    if(menu_configuracoes === 0){
+        $("#configuracoes").show();
+        menu_configuracoes = 1;
+
+        config.style.animation = "abre_configuracoes .5s";
+        config.style.padding = "15px";
+
+        setTimeout(() => {
+            config.style.height = "100%";
+
+            config.style.animation = "none";
+        }, 450);
+
+        document.getElementById("playlist").style.overflowY = "hidden";
+    }else{
+        config.style.animation = "abre_configuracoes .5s reverse";
+        config.style.padding = "0px";
+        menu_configuracoes = 0;
+        
+        setTimeout(() => {
+            config.style.height = "0%";
+            document.getElementById("playlist").style.overflowY = "auto";
+
+            config.style.animation = "none";
+        }, 450);
+    }
+});
+
 $("#jplayer_random").click(function() {
     aleatorio = aleatorio == 0 ? 1 : 0;
     let prev_random = document.getElementsByClassName("status_random");
+    
+    const cores = cores_disponiveis();
 
     if(aleatorio)
-        prev_random[0].style.color = "lightseagreen";
+        prev_random[0].style.color = `${cores[cor_escolhida][0]}`;
     else
         prev_random[0].style.color = "rgb(105, 105, 105)";
 
@@ -67,54 +103,53 @@ $("#jplayer_repeat").click(function() {
     repeteco = repeteco == 0 ? 1 : 0;
     let prev_repeat = document.getElementsByClassName("status_repeteco");
 
+    const cores = cores_disponiveis();
+    
     if(repeteco)
-        prev_repeat[0].style.color = "lightseagreen";
+        prev_repeat[0].style.color = `${cores[cor_escolhida][0]}`;
     else
         prev_repeat[0].style.color = "rgb(105, 105, 105)";
 
     localStorage.setItem('repeteco_stronzal', repeteco);
 });
 
-$("#recolher_playlist").click(function() {
-    playlist_exibe = 0;
-
-    $("#recolher_playlist").hide();
-    $("#mostrar_playlist").show();
-
-    document.getElementById("playlist").style.animation = "esconde_playlist 1s";
-
-    playlist_exibe = 0;
-
-    setTimeout(() => {
-        document.getElementById("playlist").style.right = "-50%";
-    }, 800);
-
-    sinc_botao_playlist(playlist_exibe);
-});
-
-$("#mostrar_playlist").click(function() {
+$("#btn_mostrar_playlist").click(function() {
     
-    $("#recolher_playlist").show();
-    $("#mostrar_playlist").hide();
-    
-    document.getElementById("playlist").style.animation = "mostra_playlist 1s";
+    if(playlist_exibe === 0){
+        
+        document.getElementById("playlist").style.animation = "mostra_playlist .5s";
 
-    setTimeout(() => {
-        document.getElementById("playlist").style.right = "19px";
-    }, 900);
+        setTimeout(() => {
+            document.getElementById("playlist").style.right = "19px";
+        }, 400);
 
-    playlist_exibe = 1;
+        playlist_exibe = 1;
 
-    sinc_botao_playlist(playlist_exibe);
+        sinc_botao_playlist(playlist_exibe);
+
+        playlist_exibe = 1;
+    }else{
+        document.getElementById("playlist").style.animation = "esconde_playlist .5s";
+
+        playlist_exibe = 0;
+
+        setTimeout(() => {
+            document.getElementById("playlist").style.right = "-50%";
+        }, 400);
+
+        sinc_botao_playlist(playlist_exibe);
+    }
 });
 
 function sinc_botao_playlist(caso){
+    const btn_mostrar_playlist = document.getElementById("btn_mostrar_playlist");
+    
     if(caso){
-        $("#recolher_playlist").show();
-        $("#mostrar_playlist").hide();
+        btn_mostrar_playlist.style.animation = "abre_lista_playlist .5s";
+        btn_mostrar_playlist.style.transform = "rotateZ(180deg)";
     }else{
-        $("#recolher_playlist").hide();
-        $("#mostrar_playlist").show();
+        btn_mostrar_playlist.style.animation = "fecha_lista_playlist .5s";
+        btn_mostrar_playlist.style.transform = "rotateZ(0deg)";
     }
 
     if(!playlist_exibe){

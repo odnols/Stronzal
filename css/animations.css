@@ -16,7 +16,7 @@
 }
 @keyframes favorita_faixa {
     0% { background-color: #141414 !important; }
-    50% { background-color: rgb(17, 88, 85) !important; }
+    50% { background-color: rgb(88, 17, 17) !important; }
     100% { background-color: #141414 !important; }
 }
 @keyframes esconde_playlist {
@@ -26,4 +26,20 @@
 @keyframes mostra_playlist {
     from { right: -50%; }
     to { right: 19px; }
+}
+@keyframes abre_lista_playlist {
+    from { transform: rotateZ(0deg); }
+    to { transform: rotateZ(180deg); }
+}
+@keyframes fecha_lista_playlist {
+    from { transform: rotateZ(180deg); }
+    to { transform: rotateZ(360deg); }
+}
+@keyframes abre_configuracoes {
+    from { height: 0%; }
+    to { height: 100%; }    
+}
+@keyframes mostra_elemento {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

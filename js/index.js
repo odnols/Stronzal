@@ -192,6 +192,8 @@ function tocando_agora(id_faixa){
     if(id_faixa !== "auto")
         id_faixa_atual = id_faixa;
 
+    altera_cores(cor_escolhida);
+
     const esconde_num_faixa = document.getElementsByClassName(`num_faixa_${id_faixa}`);
     const mostra_todas_faixas = document.getElementsByClassName("num_faixa_cr");
 

@@ -31,9 +31,7 @@
         </div>
     </div>
 
-
     <div id="bg_stronzal">
-
         <div id="faixas_playlist">
             <div id="content_faixas_playlist"></div>
         </div>
@@ -60,7 +58,17 @@
     </div>
 
     <div id="playlist">
-        <span id="faixas_pl"></span>
+        <div id="configuracoes">
+            <h1>Configurações</h1>
+
+            <div id="palheta_cores">
+                <h2>Palheta de cores</h2>
+
+                <div id="cores_personalizadas"></div>
+            </div>
+        </div>
+
+        <div id="faixas_pl"></div>
     </div>
     
     <div id="infos_faixa">
@@ -97,8 +105,9 @@
                     </div>
                 </div>
 
-                <i class="fa-2x fas fa-arrow-right" id="recolher_playlist"></i>
-                <i class="fa-2x fas fa-arrow-left" id="mostrar_playlist"></i>
+                <i class="fa-2x fas fa-cog" id="btn_abrir_configuracoes"></i>
+
+                <i class="fa-2x fas fa-arrow-left" id="btn_mostrar_playlist"></i>
             </div>
         </div>
     </div>
@@ -109,5 +118,6 @@
 <script src="js/dados.js"></script>
 <script src="js/albuns.js"></script>
 <script src="js/playlists.js"></script>
+<script src="js/configuracoes.js"></script>
 <script src="js/index.js"></script>
 </html>
