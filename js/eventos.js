@@ -63,7 +63,7 @@ $("#btn_abrir_configuracoes").click(function() {
 
         config.style.animation = "abre_configuracoes .5s";
         config.style.padding = "15px";
-
+        
         setTimeout(() => {
             config.style.height = "100%";
 
@@ -73,10 +73,10 @@ $("#btn_abrir_configuracoes").click(function() {
         document.getElementById("playlist").style.overflowY = "hidden";
     }else{
         config.style.animation = "abre_configuracoes .5s reverse";
-        config.style.padding = "0px";
         menu_configuracoes = 0;
         
         setTimeout(() => {
+            config.style.padding = "0px";
             config.style.height = "0%";
             document.getElementById("playlist").style.overflowY = "auto";
 

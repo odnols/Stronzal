@@ -51,6 +51,14 @@ function altera_cores(id_cores){
      
     preview_album[0].style.background = `linear-gradient(0deg, rgba(0,0,0,1) 0%, ${cores[id_cores][2]} 19%, rgba(0,212,255,0) 100%)`;
     
+    let prev_random = document.getElementsByClassName("status_random");
+    if(aleatorio)
+        prev_random[0].style.color = `${cores[id_cores][0]}`;
+
+    let prev_repeat = document.getElementsByClassName("status_repeteco");
+    if(repeteco)
+        prev_repeat[0].style.color = `${cores[id_cores][0]}`;
+    
     cor_escolhida = id_cores;
     localStorage.setItem("cor_destaque_stronzal", cor_escolhida);
 }
