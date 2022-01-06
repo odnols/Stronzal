@@ -15,6 +15,7 @@ function cores_disponiveis(){
         4 : ["#4020b2", "#240e4eb3", "#090222dc"],
         5 : ["#b2b020", "#4e480eb3", "#222102dc"],
         6 : ["#2cb220", "#154e0eb3", "#072202dc"]
+        // 7 : ["#b27320", "#4e2d0eb3", "#221302dc"]
     }
 
     return cores;
@@ -66,6 +67,9 @@ function carrega_cor(){
     let cor_escolhida_c = localStorage.getItem("cor_destaque_stronzal");
     if(typeof cor_escolhida_c !== "undefined")
         cor_escolhida = parseInt(cor_escolhida_c);
+
+    if(isNaN(cor_escolhida))
+        cor_escolhida = 1;
 
     return cor_escolhida;
 }

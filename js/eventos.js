@@ -1,4 +1,5 @@
 var menu_configuracoes = 0;
+var id_faixa_anterior;
 
 // Captura o evento de clique para o botão de anterior
 $("#jplayer_anterior").click(function() {
@@ -34,6 +35,7 @@ $("#btn_pagina_inicial").click(function() {
     }, 800);
 
     sinc_botao_playlist(0);
+    carrega_inicio();
 });
 
 $("#btn_biblioteca").click(function() {
@@ -154,8 +156,11 @@ function sinc_botao_playlist(caso){
 
     if(!playlist_exibe){
         document.getElementById("lista_biblioteca_pessoal").style.width = "70%";
-    }else
+        document.getElementById("lista_playlists_criadas").style.width = "70%";
+    }else{
         document.getElementById("lista_biblioteca_pessoal").style.width = "55%";
+        document.getElementById("lista_playlists_criadas").style.width = "55%";
+    }
 }
 
 function esconde_tudo(){
@@ -164,9 +169,43 @@ function esconde_tudo(){
     $("#faixas_curtidas").hide();
     $("#playlists_criadas").hide();
     $("#faixas_playlist").hide();
+    $("#opcoes_fx").hide();
 }
 
-function sync_now_playing(id_faixa){
-
+function opcoes_faixa(id_faixa, id_playlist, alvo){
     
+    if(alvo){
+        const dados_album = constroi_playlist(id_playlist, true);
+        dados_playlist_ativa = dados_album;
+    }
+
+    $("#opcoes_fx").show();
+
+    if(id_faixa === id_faixa_anterior){
+        $("#opcoes_fx").toggle();
+        id_faixa_anterior = null
+    }else
+        id_faixa_anterior = id_faixa;
+
+    opcoes_fx.style.top = `${posY}px`;
+
+    Object.keys(album_static).map(function(key) { // Buscando o ID do álbum
+        if(album_static[key].includes(id_faixa))
+            id_album = key;
+    });
+
+    let faixa_curtida = faixas_curtidas.includes(`${id_faixa}:${id_album}`) ? "Descurtir faixa" : "Curtir faixa";
+
+    if(alvo){
+        opcoes_fx.innerHTML = `
+            <a href="#" onclick="remove_faixa_playlist(${id_playlist}, ${id_faixa})">Remover da playlist</a><hr>
+            <a href="#" onclick="adiciona_faixa_playlist(${id_playlist}, ${id_faixa})">Adicionar a uma playlist</a><hr>
+            <a href="#" onclick="curtir_faixa(${id_faixa}, ${id_album})">${faixa_curtida}</a>
+        `;
+    }else{
+        opcoes_fx.innerHTML = `
+            <a href="#" onclick="curtir_faixa(${id_faixa}, ${id_album})">Adicionar a uma playlist</a> <hr>
+            <a href="#" onclick="curtir_faixa(${id_faixa}, ${id_album})">${faixa_curtida}</a>
+        `;
+    }
 }

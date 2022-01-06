@@ -71,11 +71,11 @@ body{
 }
 a{
     text-decoration: none !important;
-    color: rgb(141, 141, 141);;
+    color: rgb(141, 141, 141);
     transition: color .2s;
 }
 a:hover{
-    color: lightseagreen;
+    color: #f0f0f0;;
 }
 .jp-controls{
     float: left;
@@ -240,7 +240,7 @@ a:hover{
     height: 40px;
 }
 .item_playlist:hover{
-    background-color: rgba(110, 110, 110, 0.7);
+    background-color: rgba(68, 68, 68, .7);
 }
 .playing_now, .playing_now_cr{
     display: none;
@@ -269,8 +269,8 @@ a:hover{
 }
 .curtir_faixa{
     float: right;
-    padding-right: 5px;
-    margin-top: -15px;
+    padding-right: 10px;
+    margin-top: -13px;
 }
 .faixa_n_curtida{
     color: #888;
@@ -303,14 +303,13 @@ a:hover{
     margin-bottom: 150px !important;
     transition: width 1s;
 }
-#lista_biblioteca_pessoal{
+#lista_biblioteca_pessoal, #lista_playlists_criadas{
     width: 70%;
     margin-left: 20% !important;
     position: absolute;
     padding-bottom: 100px;
 }
-/* #faixas_playlist*/
-#playlists_criadas, #faixas_curtidas, #pagina_inicial, #biblioteca_user{
+#playlists_criadas, #faixas_curtidas, #faixas_playlist, #biblioteca_user{
     display: none;
 }
 #content_faixas_playlist{
@@ -413,4 +412,55 @@ a:hover{
     border-radius: 25px;
     float: left;
     margin-left: 10%;
+}
+#opcoes_fx{
+    z-index: 4;
+    position: fixed;
+    left: 35%;
+    margin-left: -100px;
+    max-width: 200px;
+    background-color: #141414;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 10px;
+    display: none;
+}
+hr{
+    height: 2px;
+    width: 100%;
+    border: 0px solid;
+    background-color: rgb(34, 34, 34);
+}
+#tipo_playlist{
+    float: left;
+    margin-left: 20px;
+    margin-top: 30px;
+    font-size: 20px;
+}
+#qtd_faixas{
+    margin-top: 30px;
+    font-size: 20px;
+    float: left;
+}
+#play_recomendados{
+    overflow: hidden;
+    background-color: rgba(27, 27, 27, .7);
+    border-radius: 5px;
+    width: 72%;
+    height: 330px;
+    padding: 15px;
+    margin-left: 23%;
+}
+.album_inicio_recomendados{
+    padding: 5px;
+    margin: 15px;
+    float: left;
+    height: auto;
+    background-color: rgb(34, 34, 34);
+    border-radius: 5px;
+    z-index: 5;
+}
+.img_album_recomendado{
+    width: 200px;
+    height: 200px;
 }

@@ -23,10 +23,10 @@ palheta_cores();
 function altera_cores(id_cores){
 
     const cores = cores_disponiveis();
-
-    document.getElementById("progress_bar").style.backgroundColor = `${cores[id_cores][0]}`;
-    document.getElementById("bg_stronzal").style.backgroundColor = `${cores[id_cores][1]}`;
     
+    document.getElementById("progress_bar").style.backgroundColor = `${cores[id_cores][0]}`;    
+    document.getElementById("bg_stronzal").style.backgroundColor = `${cores[id_cores][1]}`;
+
     const itens_classes = ["bc:jp-volume-bar-value:0", "bc:barra_1:0", "bc:barra_2:0", "bc:barra_3:0", "bc:barra_4:0", "c:icons_nav:0", "c:faixa_curtida:0", "f:faixa_curtida:0"];
 
     for(let i = 0; i < itens_classes.length; i++){

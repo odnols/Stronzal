@@ -1,4 +1,9 @@
+var posY;
 var dados_playlist_ativa = [];
+
+document.querySelector('body').addEventListener('mousemove', function(event) {
+    posY = event.clientY;
+});
 
 var playlists = {
     2842342 : {
@@ -12,6 +17,12 @@ var playlists = {
         name : "Rochelle's",
         cover : "https://adrianojrodrigues.files.wordpress.com/2011/08/chris2.gif",
         likes : 0
+    },
+    8347534 : {
+        faixas : [847, 849, 856, 863],
+        name : "Rock'n Roll",
+        cover : "https://fotos.caras.uol.com.br/media/images/large/2014/07/16/img-619827-roque20140716141405531791.jpg",
+        likes : 0
     }
 };
 
@@ -19,12 +30,7 @@ function sincroniza_playlists(){
     let lista_playlists = document.getElementById("lista_playlists_criadas");
     lista_playlists.innerHTML = "";
     let titl = document.getElementsByClassName("playlists_criadas");
-
-    // if(playlists.length < 2){
-    //     titl[0].innerHTML = "Você ainda não criou nenhuma playlist <i class='fas fa-heart-broken'></i>";
-    //     // return
-    // }else
-        titl[0].innerHTML = "Suas playlists";
+    titl[0].innerHTML = "Suas playlists";
 
     Object.keys(playlists).map(function(key) {
         lista_playlists.innerHTML += `<a href="#" class='item_album_link' onclick='constroi_playlist(${key})'><div class='item_album_curtido item_album_curtido_${key}'>
@@ -62,13 +68,16 @@ function constroi_playlist(id_playlist, req_auto){
     sinc_botao_playlist(1);
 }
 
-sincroniza_playlists();
-
 function exibe_itens_playlist(dados_playlist_ativa, id_playlist){
+
+    console.log(id_playlist, typeof id_playlist);
 
     if(typeof id_playlist !== "undefined"){
         id_playlist_ativa = id_playlist;
         id_album_ativo = 0;
+
+        const dados_album = constroi_playlist(id_playlist, true);
+        dados_playlist_ativa = dados_album;
     }
 
     const content_faixas_playlist = document.getElementById("content_faixas_playlist");
@@ -77,7 +86,9 @@ function exibe_itens_playlist(dados_playlist_ativa, id_playlist){
     $("#faixas_playlist").show();
 
     nome_artista_album = "Slondo"
-    content_faixas_playlist.innerHTML = `<div id="painel_album"><a href="#" onclick="carrega_playlist_pers(${id_playlist})"><img id="img_capa_album" src="${playlists[id_playlist]["cover"]}"></a><h1 id="nome_playlist_album">${playlists[id_playlist]["name"]}</h1><span id="criador_playlist_album">${nome_artista_album}</span></div></a>`;
+    content_faixas_playlist.innerHTML = `<div id="painel_album"><a href="#" onclick="carrega_playlist_pers(${id_playlist})"><img id="img_capa_album" src="${playlists[id_playlist]["cover"]}"></a><span id="tipo_playlist"><i class="fas fa-compact-disc"></i> Playlist |&nbsp;</span><span id="qtd_faixas">20 faixas</span><h1 id="nome_playlist_album">${playlists[id_playlist]["name"]}</h1><span id="criador_playlist_album">${nome_artista_album}</span></div>`;
+
+    document.getElementById("qtd_faixas").innerHTML = dados_playlist_ativa.length > 1 ? `${dados_playlist_ativa.length} faixas` : `1 faixa`;
 
     let i = 0;
     Object.keys(dados_playlist_ativa).map(function(key) {
@@ -91,8 +102,8 @@ function exibe_itens_playlist(dados_playlist_ativa, id_playlist){
 
         <div class="item_playlist" id="faixa_scroll_0x${dados_playlist_ativa[key]["id"]}">
             
-            <a href="#" class="add_faixa_playlist" onclick="add_playlist()">
-                <i class="fa-2x fas fa-ellipsis-v"></i>
+            <a href="#" class="add_faixa_playlist">
+                <i class="fa-2x fas fa-ellipsis-v" onclick="opcoes_faixa(${dados_playlist_ativa[key]["id"]}, ${id_playlist}, 1)"></i>
             </a>
 
             <a href="#" onclick='musicaCurtida(${i}, ${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})'>
@@ -135,7 +146,9 @@ function atualiza_itens_playlist(id_playlist){
     const content_faixas_playlist = document.getElementById("content_faixas_playlist");
 
     nome_artista_album = "Slondo"
-    content_faixas_playlist.innerHTML = `<div id="painel_album"><a href="#" onclick="carrega_playlist_pers(${id_playlist})"><img id="img_capa_album" src="${playlists[id_playlist]["cover"]}"></a><h1 id="nome_playlist_album">${playlists[id_playlist]["name"]}</h1><span id="criador_playlist_album">${nome_artista_album}</span></div></a>`;
+    content_faixas_playlist.innerHTML = `<div id="painel_album"><a href="#" onclick="carrega_playlist_pers(${id_playlist})"><img id="img_capa_album" src="${playlists[id_playlist]["cover"]}"></a><span id="tipo_playlist"><i class="fas fa-compact-disc"></i> Playlist |&nbsp;</span><span id="qtd_faixas">20 faixas</span><h1 id="nome_playlist_album">${playlists[id_playlist]["name"]}</h1><span id="criador_playlist_album">${nome_artista_album}</span></div>`;
+
+    document.getElementById("qtd_faixas").innerHTML = dados_playlist_ativa.length > 1 ? `${dados_playlist_ativa.length} faixas` : `1 faixa`;
 
     let i = 0;
     Object.keys(dados_playlist_ativa).map(function(key) {
@@ -149,8 +162,8 @@ function atualiza_itens_playlist(id_playlist){
 
         <div class="item_playlist" id="faixa_scroll_0x${dados_playlist_ativa[key]["id"]}">
             
-            <a href="#" class="add_faixa_playlist" onclick="add_playlist()">
-                <i class="fa-2x fas fa-ellipsis-v"></i>
+            <a href="#" class="add_faixa_playlist">
+                <i class="fa-2x fas fa-ellipsis-v" onclick="opcoes_faixa(${dados_playlist_ativa[key]["id"]}, ${id_playlist}, 1)"></i>
             </a>
 
             <a href="#" onclick='musicaCurtida(${i}, ${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})'>
@@ -192,3 +205,30 @@ function carrega_playlist_pers(id_playlist) {
 
     $("#jquery_jplayer").jPlayer("play"); 
 }
+
+function remove_faixa_playlist(id_playlist, id_faixa){
+    
+    playlists[id_playlist]["faixas"].splice(playlists[id_playlist]["faixas"].indexOf(id_faixa), 1);
+    
+    const dados_album = constroi_playlist(id_playlist, true);
+    dados_playlist_ativa = dados_album;
+
+    atualiza_itens_playlist(id_playlist);
+    document.getElementById("opcoes_fx").style.display = "none";
+}
+
+function adiciona_faixa_playlist(id_playlist, id_faixa){
+
+    let nova_playlist = playlists[id_playlist]["faixas"];
+    nova_playlist.push(id_faixa);
+
+    playlists[id_playlist]["faixas"] = nova_playlist;
+
+    const dados_album = constroi_playlist(id_playlist, true);
+    dados_playlist_ativa = dados_album;
+
+    atualiza_itens_playlist(id_playlist);
+    document.getElementById("opcoes_fx").style.display = "none";
+}
+
+sincroniza_playlists();
