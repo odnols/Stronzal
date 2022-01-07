@@ -70,8 +70,6 @@ function constroi_playlist(id_playlist, req_auto){
 
 function exibe_itens_playlist(dados_playlist_ativa, id_playlist){
 
-    console.log(id_playlist, typeof id_playlist);
-
     if(typeof id_playlist !== "undefined"){
         id_playlist_ativa = id_playlist;
         id_album_ativo = 0;
@@ -217,7 +215,7 @@ function remove_faixa_playlist(id_playlist, id_faixa){
     document.getElementById("opcoes_fx").style.display = "none";
 }
 
-function adiciona_faixa_playlist(id_playlist, id_faixa){
+function adiciona_faixa_playlist(id_playlist, id_faixa, req_auto){
 
     let nova_playlist = playlists[id_playlist]["faixas"];
     nova_playlist.push(id_faixa);
@@ -227,7 +225,9 @@ function adiciona_faixa_playlist(id_playlist, id_faixa){
     const dados_album = constroi_playlist(id_playlist, true);
     dados_playlist_ativa = dados_album;
 
-    atualiza_itens_playlist(id_playlist);
+    if(req_auto)
+        atualiza_itens_playlist(id_playlist);
+    
     document.getElementById("opcoes_fx").style.display = "none";
 }
 

@@ -179,6 +179,10 @@ function opcoes_faixa(id_faixa, id_playlist, alvo){
         dados_playlist_ativa = dados_album;
     }
 
+    let opcoes_fx = document.getElementById("opcoes_fx");
+    opcoes_fx.style.maxWidth = "200px";
+    opcoes_fx.style.width = "200px";
+
     $("#opcoes_fx").show();
 
     if(id_faixa === id_faixa_anterior){
@@ -199,13 +203,27 @@ function opcoes_faixa(id_faixa, id_playlist, alvo){
     if(alvo){
         opcoes_fx.innerHTML = `
             <a href="#" onclick="remove_faixa_playlist(${id_playlist}, ${id_faixa})">Remover da playlist</a><hr>
-            <a href="#" onclick="adiciona_faixa_playlist(${id_playlist}, ${id_faixa})">Adicionar a uma playlist</a><hr>
+            <a href="#" onclick="add_playlist(${id_faixa}, ${id_playlist}, ${alvo})">Adicionar a uma playlist</a><hr>
             <a href="#" onclick="curtir_faixa(${id_faixa}, ${id_album})">${faixa_curtida}</a>
         `;
     }else{
         opcoes_fx.innerHTML = `
-            <a href="#" onclick="curtir_faixa(${id_faixa}, ${id_album})">Adicionar a uma playlist</a> <hr>
+            <a href="#" onclick="add_playlist(${id_faixa}, ${id_playlist}, ${alvo})">Adicionar a uma playlist</a> <hr>
             <a href="#" onclick="curtir_faixa(${id_faixa}, ${id_album})">${faixa_curtida}</a>
         `;
     }
+}
+
+function add_playlist(id_faixa, id_playlist, alvo){
+
+    let opcoes_fx = document.getElementById("opcoes_fx");
+    opcoes_fx.style.maxWidth = "300px";
+    opcoes_fx.style.width = "300px";
+
+    opcoes_fx.innerHTML = `<a href="#" onclick="opcoes_faixa(${id_faixa}, ${id_playlist}, ${alvo})">Cancelar</a>`;
+
+    Object.keys(playlists).map(function(key) {
+        opcoes_fx.innerHTML += `<hr><a href="#" onclick='adiciona_faixa_playlist(${key}, ${id_faixa}, ${alvo})'>${playlists[key]["name"].length > 20 ? playlists[key]["name"].slice(0, 17) +"..." : playlists[key]["name"] }
+        </div></a>`;
+    });
 }
