@@ -64,8 +64,10 @@ function mudarPlayList(index) {
     localStorage.setItem("musica_ativa_h", id_faixa_atual);
     localStorage.setItem("playlist_ativa", JSON.stringify(minhaPlayList));
 
-    let scrollDiv = document.getElementById("faixa_scroll_0x"+ index); // Scroll a playlist até a faixa atual
-    scrollDiv.scrollIntoView({block: "center", behavior: "smooth"});
+    if(playlist_exibe){
+        let scrollDiv = document.getElementById("faixa_scroll_0x"+ index); // Scroll a playlist até a faixa atual
+        scrollDiv.scrollIntoView({block: "center", behavior: "smooth"});
+    }
 
     // Tocando agora
     document.getElementById("nome_artista").innerHTML = owners[albuns[minhaPlayList[index]["album"]]["owner"]];
@@ -460,7 +462,7 @@ function atualiza_itens_album(id_album){
     tocando_agora(id_faixa_atual);
 }
 
-function carrega_inicio(){
+function carrega_inicio(auto){
 
     let constroi_inicio = document.getElementById("play_recomendados");
     constroi_inicio.innerHTML = "";
@@ -487,7 +489,8 @@ function carrega_inicio(){
     // Barra de progresso
     document.getElementById("progress_bar").style.width = `${porcentagemTocada}%`;
 
-    $("#jquery_jplayer").jPlayer("playHead", porcentagemTocada);
+    if(typeof auto == "undefined")
+        $("#jquery_jplayer").jPlayer("playHead", porcentagemTocada);
 }
 
 carrega_inicio();

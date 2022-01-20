@@ -35,7 +35,7 @@ $("#btn_pagina_inicial").click(function() {
     }, 800);
 
     sinc_botao_playlist(0);
-    carrega_inicio();
+    carrega_inicio(true);
 });
 
 $("#btn_biblioteca").click(function() {

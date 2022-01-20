@@ -9,7 +9,8 @@ var owners = {
     8345734 : "Simply Red",
     2987293 : "Almost monday",
     2388482 : "Simple Minds",
-    2984245 : "Dan Croll"
+    2984245 : "Dan Croll",
+    2983428 : "Queen"
 }
 
 var albuns = {
@@ -90,6 +91,18 @@ var albuns = {
         name : "From Nowhere",
         likes : 0,
         owner : 2984245
+    },
+    283244 : {
+        cover : "https://upload.wikimedia.org/wikipedia/pt/4/49/Queen-The_Works.jpg",
+        name : "The Works",
+        likes : 0,
+        owner : 2983428
+    },
+    984599 : {
+        cover : "https://www.udiscovermusic.com/wp-content/uploads/2019/11/the-miracle.jpg",
+        name : "The Miracle",
+        likes : 0,
+        owner : 2983428
     }
 }
 
@@ -225,6 +238,33 @@ function dados_albuns(id_album){
                 {id: 222, mp3: "songs/394856/1.mp3", album: "394856", name: "From Nowhere (Baardsen Remix)"}
             ];
         break;
+        case 283244:
+            album = [
+                {id: 540, mp3: "songs/283244/1.mp3", album: "283244", name: "Radio Gaga (Remastered 2011)"},
+                {id: 541, mp3: "songs/283244/2.mp3", album: "283244", name: "Tear It Up (Remastered 2011)"},
+                {id: 542, mp3: "songs/283244/3.mp3", album: "283244", name: "It's A Hard Life (Remastered 2011)"},
+                {id: 543, mp3: "songs/283244/4.mp3", album: "283244", name: "Man On The Prowl (Remastered 2011)"},
+                {id: 544, mp3: "songs/283244/5.mp3", album: "283244", name: "Machines (Or Back To Humans)"},
+                {id: 545, mp3: "songs/283244/6.mp3", album: "283244", name: "I Want To Break Free (Remastered 2011)"},
+                {id: 546, mp3: "songs/283244/7.mp3", album: "283244", name: "Keep Passing The Open Windows (Remastered 2011)"},
+                {id: 547, mp3: "songs/283244/8.mp3", album: "283244", name: "Hammer To Fall (Remastered 2011)"},
+                {id: 548, mp3: "songs/283244/9.mp3", album: "283244", name: "Is This The World We Created... ? (Remastered 2011)"},
+            ];
+        break;
+        case 984599:
+            album = [
+                {id: 580, mp3: "songs/984599/1.mp3", album: "984599", name: "Party (Remastered 2011)"},
+                {id: 581, mp3: "songs/984599/2.mp3", album: "984599", name: "Khashoggi's Ship (Remastered 2011)"},
+                {id: 582, mp3: "songs/984599/3.mp3", album: "984599", name: "The Miracle (Remastered 2011)"},
+                {id: 583, mp3: "songs/984599/4.mp3", album: "984599", name: "I Want It All (Remastered 2011)"},
+                {id: 584, mp3: "songs/984599/5.mp3", album: "984599", name: "The Invisible Man (Remastered 2011)"},
+                {id: 585, mp3: "songs/984599/6.mp3", album: "984599", name: "Breakthru (Remastered 2011)"},
+                {id: 586, mp3: "songs/984599/7.mp3", album: "984599", name: "Rain Must Fall (Remastered 2011)"},
+                {id: 587, mp3: "songs/984599/8.mp3", album: "984599", name: "Scandal (Remastered 2011)"},
+                {id: 588, mp3: "songs/984599/9.mp3", album: "984599", name: "My Baby Does Me (Remastered 2011)"},
+                {id: 589, mp3: "songs/984599/10.mp3", album: "984599", name: "Was It All Worth It (Remastered 2011)"},
+            ];
+        break;
     }
 
     return album;
@@ -235,14 +275,16 @@ var album_static = {
     348954 : [396],
     348953 : [395],
     583459 : [986],
-    953452 : [495, 496],
-    485345 : [234, 235],
-    945345 : [458, 459, 460, 461, 462, 463, 464, 465, 466, 467],
-    418854 : [844, 845, 846, 847, 848, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 873],
     238425 : [539],
-    283472 : [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122],
-    586453 : [385, 386],
     298528 : [239],
     485346 : [485],
-    394856 : [222]
+    394856 : [222],
+    953452 : [495, 496],
+    485345 : [234, 235],
+    586453 : [385, 386],
+    283244 : [540, 541, 542, 543, 544, 545, 546, 547, 548],
+    945345 : [458, 459, 460, 461, 462, 463, 464, 465, 466, 467],
+    984599 : [580, 581, 582, 583, 584, 585, 586, 587, 588, 589],
+    283472 : [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122],
+    418854 : [844, 845, 846, 847, 848, 849, 850, 851, 852, 853, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 867, 868, 869, 870, 871, 872, 873]
 }

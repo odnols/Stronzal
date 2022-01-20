@@ -22,6 +22,7 @@ $("#jquery_jplayer").jPlayer({
         jpTempoTotal.text(`- ${$.jPlayer.convertTime(totalTime - playedTime)}`);
 
     porcentagemTocada = playedPercentRelative;
+    tempoTocado = playedTime;
 
     // Barra de progresso
     document.getElementById("progress_bar").style.width = `${playedPercentRelative}%`;
