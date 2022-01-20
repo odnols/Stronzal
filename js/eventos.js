@@ -55,6 +55,16 @@ $("#btn_playlists").click(function() {
     sincroniza_playlists();
 });
 
+$("#jplayer_tempo_total").click(function() {
+    
+    if(tempo_total_reverso)
+        tempo_total_reverso = 0;
+    else
+        tempo_total_reverso = 1;
+
+    localStorage.setItem("tempo_total_reverso", tempo_total_reverso);
+});
+
 $("#btn_abrir_configuracoes").click(function() {
     
     const config = document.getElementById("configuracoes");

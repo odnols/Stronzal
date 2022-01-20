@@ -3,6 +3,7 @@ var volume_musica = 2;
 var aleatorio = 0;
 var repeteco = 0;
 var cor_escolhida = 1;
+var tempo_total_reverso = 0;
 
 carrega_cor();
 
@@ -62,6 +63,11 @@ if(typeof repeat !== "undefined"){
     else
         prev_repeat[0].style.color = "rgb(105, 105, 105)";
 }
+
+let tempo_total_reverso_h = localStorage.getItem('tempo_total_reverso');
+if(typeof tempo_total_reverso_h !== "undefined")
+    tempo_total_reverso = parseInt(tempo_total_reverso_h);
+
 
 function carrega_cor(){
     let cor_escolhida_c = localStorage.getItem("cor_destaque_stronzal");

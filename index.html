@@ -94,9 +94,11 @@
                     <a href="#" class="icon_control" id="jplayer_random"><i class="icn_ctrl fa-2x fas fa-random icons_secundarios status_random"></i></a>
                 </div>
 
-                <div class="player-timeline">
+                <div id="opcs_progress" class="player-timeline">
                     <div id="jplayer_tempo_execucao" style="float: left;">00:00</div>
-                    <div class="player-timeline-control"><div id="progress_bar"></div></div>
+                    <a href="#">
+                        <div id="barra_progresso" class="player-timeline-control" onclick="altera_tempo_tocado()"><div id="progress_bar"></div></div>
+                    </a>
                     <div id="jplayer_tempo_total" style="float: right;">00:00</div>
                 </div>
 
@@ -123,4 +125,6 @@
 <script src="js/playlists.js"></script>
 <script src="js/configuracoes.js"></script>
 <script src="js/index.js"></script>
+<script src="js/engine.js"></script>
+
 </html>

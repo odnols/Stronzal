@@ -44,17 +44,17 @@ body{
 }
 .top-bar .player-timeline {
     float: left;
-    max-width: 500px;
-    width: 500px;
+    max-width: 530px;
+    width: 530px;
     position: absolute;
     left: 50%;
-    margin-left: -250px;
+    margin-left: -265px;
     height: 40px;
     margin-top: 13px;
 }
 .top-bar .player-timeline-control {
     height: 4px;
-    width: 81%;
+    width: 430px;
     margin-top: 12px;
     border-radius: 5px;
     float: left;
