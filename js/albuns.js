@@ -8,7 +8,8 @@ var owners = {
     2382932 : "Level 42",
     8345734 : "Simply Red",
     2987293 : "Almost monday",
-    2388482 : "Simple Minds"
+    2388482 : "Simple Minds",
+    2984245 : "Dan Croll"
 }
 
 var albuns = {
@@ -83,6 +84,12 @@ var albuns = {
         name : "Celebrate (Greatest Hits / Expanded Edition)",
         likes : 0,
         owner : 2388482
+    },
+    394856 : {
+        cover : "https://i.scdn.co/image/ab67616d0000b27308005ba933e786b3d0d8156f",
+        name : "From Nowhere",
+        likes : 0,
+        owner : 2984245
     }
 }
 
@@ -213,6 +220,11 @@ function dados_albuns(id_album){
                 {id: 485, mp3: "songs/485346/1.mp3", album: "485346", name: "Don't You (Forget About Me)"}
             ];
         break;
+        case 394856:
+            album = [
+                {id: 222, mp3: "songs/394856/1.mp3", album: "394856", name: "From Nowhere (Baardsen Remix)"}
+            ];
+        break;
     }
 
     return album;
@@ -231,5 +243,6 @@ var album_static = {
     283472 : [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122],
     586453 : [385, 386],
     298528 : [239],
-    485346 : [485]
+    485346 : [485],
+    394856 : [222]
 }

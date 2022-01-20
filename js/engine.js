@@ -1,7 +1,8 @@
 preview_playlist();
 var jpTempoExecucao = $("#jplayer_tempo_execucao");
 var jpTempoTotal = $("#jplayer_tempo_total");
-var tempoTocado = 0;
+var porcentagemTocada = 0;
+var porcent_player_global = 0;
 
 // Função de criação e configuração do player.
 $("#jquery_jplayer").jPlayer({
@@ -20,7 +21,7 @@ $("#jquery_jplayer").jPlayer({
     else
         jpTempoTotal.text(`- ${$.jPlayer.convertTime(totalTime - playedTime)}`);
 
-    tempoTocado = playedTime;
+    porcentagemTocada = playedPercentRelative;
 
     // Barra de progresso
     document.getElementById("progress_bar").style.width = `${playedPercentRelative}%`;
@@ -40,7 +41,8 @@ function exibirPlayList() {
         $("#jplayer_playlist_item_"+ i).data("index", i)
         .click(function() {
             var index = $(this).data("index");
-            if(playItem != index)
+
+            if(playItem !== index)
                 mudarPlayList(index);
             else
                 $("#jquery_jplayer").jPlayer("play");
@@ -61,8 +63,11 @@ function exibirPlayList() {
 
 // Inicializa a playlist
 function playListInit(autoplay){
+
+    console.log(indice_faixa_atual);
+
     if(autoplay)
-        mudarPlayList(playItem);
+        mudarPlayList(indice_faixa_atual);
     else
         playListConfig(playItem);
 }
@@ -90,3 +95,12 @@ function altera_tempo_tocado(){
 
     $("#jquery_jplayer").jPlayer("playHead", (100 * (distancia_left - posX) / 430) * -1);
 }
+
+// Salva alguns dados antes de fechar a janela
+window.addEventListener("unload", function(){
+    localStorage.setItem("playlist_ativa", JSON.stringify(minhaPlayList));
+    localStorage.setItem("musica_ativa_h", id_faixa_atual);
+    localStorage.setItem("indice_faixa_ativa_h", indice_faixa_atual);
+
+    localStorage.setItem("timeline_progress", porcentagemTocada);
+});

@@ -4,6 +4,12 @@ var aleatorio = 0;
 var repeteco = 0;
 var cor_escolhida = 1;
 var tempo_total_reverso = 0;
+var id_faixa_atual = 0;
+var indice_faixa_atual = 0;
+
+var minhaPlayList = [
+    {id: 539, mp3:"songs/238425/1.mp3", album: "238425", name:"Skyfall"}
+];
 
 carrega_cor();
 
@@ -33,6 +39,22 @@ if(faixas_c_historico !== null){
     if(faixas_curtidas[0] === '' && faixas_curtidas.length === 1)
         faixas_curtidas = [];
 }
+
+const playlist_ativa_h = localStorage.getItem("playlist_ativa");
+if(typeof playlist_ativa_h !== "undefined")
+    minhaPlayList = JSON.parse(playlist_ativa_h);
+
+let musica_ativa_h = localStorage.getItem("musica_ativa_h");
+if(typeof musica_ativa_h != "undefined"){
+    id_faixa_atual = parseInt(musica_ativa_h);
+
+    const indice_faixa_atual_h = localStorage.getItem("indice_faixa_ativa_h");
+    indice_faixa_atual = parseInt(indice_faixa_atual_h);
+}
+
+let porcentagemTocada_h = localStorage.getItem("timeline_progress");
+if(typeof porcentagemTocada_h !== "undefined")
+    porcentagemTocada = parseFloat(porcentagemTocada_h);
 
 let volume_historico = localStorage.getItem('volume_musica');
 if(typeof volume_musica !== "undefined")

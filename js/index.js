@@ -1,5 +1,4 @@
 var playItem = 0;
-var id_faixa_atual = 0;
 var id_album_ativo = 0;
 var id_playlist_ativa = 0;
 var faixas_tocadas = [];
@@ -7,10 +6,6 @@ var vol_anterior = 0;
 var playlistAtiva = 0;
 
 var playlist_exibe = 0;
-
-var minhaPlayList = [
-    {id: 539, mp3:"songs/238425/1.mp3", album: "238425", name:"Skyfall"}
-];
 
 function preview_playlist(nome_playlist){
 
@@ -62,8 +57,13 @@ function mudarPlayList(index) {
     playListConfig(index);
     tocando_agora(minhaPlayList[index]["id"]);
     id_faixa_atual = minhaPlayList[index]["id"];
+    indice_faixa_atual = index;
     $("#opcoes_fx").hide();
     
+    localStorage.setItem("indice_faixa_ativa_h", indice_faixa_atual);
+    localStorage.setItem("musica_ativa_h", id_faixa_atual);
+    localStorage.setItem("playlist_ativa", JSON.stringify(minhaPlayList));
+
     let scrollDiv = document.getElementById("faixa_scroll_0x"+ index); // Scroll a playlist até a faixa atual
     scrollDiv.scrollIntoView({block: "center", behavior: "smooth"});
 
@@ -483,6 +483,11 @@ function carrega_inicio(){
 
         constroi_inicio.innerHTML += `<div class="album_inicio_recomendados"><a href="#" onclick="exibe_itens_albuns(${albuns_local[ar]})"><img class="img_album_recomendado" src="${albuns[albuns_local[ar]]["cover"]}"><h3>${albuns[albuns_local[ar]]["name"].length > 20 ? albuns[albuns_local[ar]]["name"].slice(0, 18) +"..." : albuns[albuns_local[ar]]["name"] }</h3><span >${owners[albuns[albuns_local[ar]]["owner"]]}</span></a></div>`;
     }
+
+    // Barra de progresso
+    document.getElementById("progress_bar").style.width = `${porcentagemTocada}%`;
+
+    $("#jquery_jplayer").jPlayer("playHead", porcentagemTocada);
 }
 
 carrega_inicio();
