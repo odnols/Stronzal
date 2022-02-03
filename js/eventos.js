@@ -72,7 +72,8 @@ $("#btn_abrir_configuracoes").click(function() {
     if(menu_configuracoes === 0){
         $("#configuracoes").show();
         menu_configuracoes = 1;
-
+        document.getElementById("playlist").scrollTop = 0;
+        
         config.style.animation = "abre_configuracoes .5s";
         config.style.padding = "15px";
         

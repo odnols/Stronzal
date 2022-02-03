@@ -1,8 +1,8 @@
-html{
-    -webkit-transition: all 2s ease-in;
-    -moz-transition: all 2s ease-in;
-    -o-transition: all 2s ease-in;
-    transition: all 2s ease-in;
+*{
+    transition: background-color .5s linear, color .5s;
+    -webkit-transition: background-color .5s linear, color .5s;
+    -moz-transition: background-color .5s linear, color .5s;
+    -o-transition: background-color .5s linear, color .5s;
 }
 body{
     padding: 0;
@@ -67,7 +67,7 @@ body{
     height: 4px;
     border-radius: 5px;
     width: 0%;
-    transition: width .1s;
+    transition: background-color .5s linear, width .1s;
 }
 a{
     text-decoration: none !important;
@@ -91,6 +91,7 @@ a:hover{
     z-index: 5 !important;
     left: 5%;
     transition: width .2s;
+    transition: background-color .5s linear;
 }
 #jplayer_volume_bar{
     margin-top: 15px;

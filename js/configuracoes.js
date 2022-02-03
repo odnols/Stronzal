@@ -9,11 +9,11 @@ function palheta_cores(){
     Object.keys(cores).map(function(key) {
         palhetas.innerHTML += `<br>
         
-        <div class="prancheta_palhetas" onclick="altera_cores(${key})">
+        <a href="#"><div class="prancheta_palhetas" onclick="altera_cores(${key})">
             <div class="icon_palheta_cor" style="background-color: ${cores[key][0]}"></div>
             <div class="icon_palheta_cor" style="background-color: ${cores[key][1]}"></div>
             <div class="icon_palheta_cor" style="background-color: ${cores[key][2]}"></div>
-        </div>
+        </div></a>
         `;
     });
 }
