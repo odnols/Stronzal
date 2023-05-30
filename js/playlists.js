@@ -1,38 +1,38 @@
 var posY;
 var dados_playlist_ativa = [];
 
-document.querySelector('body').addEventListener('mousemove', function(event) {
+document.querySelector('body').addEventListener('mousemove', function (event) {
     posY = event.clientY;
 });
 
 var playlists = {
-    2842342 : {
-        faixas : [111, 112, 113, 850, 851, 986, 395],
-        name : "Academia",
-        cover : "https://thumbs.gfycat.com/OrneryLegitimateJackal-size_restricted.gif",
-        likes : 0
+    2842342: {
+        faixas: [111, 112, 113, 850, 851, 986, 395],
+        name: "Academia",
+        cover: "https://thumbs.gfycat.com/OrneryLegitimateJackal-size_restricted.gif",
+        likes: 0
     },
-    4958935 : {
-        faixas : [396, 395, 496, 459, 485, 112, 458, 539],
-        name : "Rochelle's",
-        cover : "https://adrianojrodrigues.files.wordpress.com/2011/08/chris2.gif",
-        likes : 0
+    4958935: {
+        faixas: [396, 395, 496, 459, 485, 112, 458, 539],
+        name: "Rochelle's",
+        cover: "https://adrianojrodrigues.files.wordpress.com/2011/08/chris2.gif",
+        likes: 0
     },
-    8347534 : {
-        faixas : [847, 849, 856, 863],
-        name : "Rock'n Roll",
-        cover : "https://fotos.caras.uol.com.br/media/images/large/2014/07/16/img-619827-roque20140716141405531791.jpg",
-        likes : 0
+    8347534: {
+        faixas: [847, 849, 856, 863],
+        name: "Rock'n Roll",
+        cover: "https://fotos.caras.uol.com.br/media/images/large/2014/07/16/img-619827-roque20140716141405531791.jpg",
+        likes: 0
     }
 };
 
-function sincroniza_playlists(){
+function sincroniza_playlists() {
     let lista_playlists = document.getElementById("lista_playlists_criadas");
     lista_playlists.innerHTML = "";
     let titl = document.getElementsByClassName("playlists_criadas");
     titl[0].innerHTML = "Suas playlists";
 
-    Object.keys(playlists).map(function(key) {
+    Object.keys(playlists).map(function (key) {
         lista_playlists.innerHTML += `<a href="#" class='item_album_link' onclick='constroi_playlist(${key})'><div class='item_album_curtido item_album_curtido_${key}'>
             <h3 class='nome_item_album_curtido'>${playlists[key]["name"]}</h3>
         </div></a>`;
@@ -42,35 +42,35 @@ function sincroniza_playlists(){
     });
 }
 
-function constroi_playlist(id_playlist, req_auto){
-    
+function constroi_playlist(id_playlist, req_auto) {
+
     minhaPlayList_interna = [];
 
-    for(let i = 0; i < playlists[id_playlist]["faixas"].length; i++){
+    for (let i = 0; i < playlists[id_playlist]["faixas"].length; i++) {
         let id_album = 0;
-  
-        Object.keys(album_static).map(function(key) { // Buscando o ID do álbum
-            if(album_static[key].includes(playlists[id_playlist]["faixas"][i]))
+
+        Object.keys(album_static).map(function (key) { // Buscando o ID do álbum
+            if (album_static[key].includes(playlists[id_playlist]["faixas"][i]))
                 id_album = key;
         });
 
         let dados_album = dados_albuns(parseInt(id_album));
-        Object.keys(dados_album).map(function(key) { // Buscando o ID do álbum
-            if(dados_album[key]["id"] == playlists[id_playlist]["faixas"][i])
+        Object.keys(dados_album).map(function (key) { // Buscando o ID do álbum
+            if (dados_album[key]["id"] == playlists[id_playlist]["faixas"][i])
                 minhaPlayList_interna.push(dados_album[key]);
         });
     }
 
-    if(req_auto)
+    if (req_auto)
         return minhaPlayList_interna;
 
     exibe_itens_playlist(minhaPlayList_interna, id_playlist);
     sinc_botao_playlist(1);
 }
 
-function exibe_itens_playlist(dados_playlist_ativa, id_playlist){
+function exibe_itens_playlist(dados_playlist_ativa, id_playlist) {
 
-    if(typeof id_playlist !== "undefined"){
+    if (typeof id_playlist !== "undefined") {
         id_playlist_ativa = id_playlist;
         id_album_ativo = 0;
 
@@ -89,11 +89,11 @@ function exibe_itens_playlist(dados_playlist_ativa, id_playlist){
     document.getElementById("qtd_faixas").innerHTML = dados_playlist_ativa.length > 1 ? `${dados_playlist_ativa.length} faixas` : `1 faixa`;
 
     let i = 0;
-    Object.keys(dados_playlist_ativa).map(function(key) {
+    Object.keys(dados_playlist_ativa).map(function (key) {
 
         let faixa_curtida = `<i class="far fa-heart fa-2x curtir_faixa faixa_n_curtida" onclick="curtir_faixa(${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})"></i>`;
 
-        if(faixas_curtidas.includes(`${dados_playlist_ativa[key]["id"]}:${dados_playlist_ativa[key]["album"]}`))
+        if (faixas_curtidas.includes(`${dados_playlist_ativa[key]["id"]}:${dados_playlist_ativa[key]["album"]}`))
             faixa_curtida = `<i class="fas fa-heart fa-2x curtir_faixa faixa_curtida" onclick="curtir_faixa(${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})"></i>`;
 
         content_faixas_playlist.innerHTML += `<br>
@@ -125,7 +125,7 @@ function exibe_itens_playlist(dados_playlist_ativa, id_playlist){
         i++;
     });
 
-    if(playlist_exibe == 0){
+    if (playlist_exibe == 0) {
         document.getElementById("playlist").style.animation = "mostra_playlist 1s";
 
         setTimeout(() => {
@@ -139,8 +139,8 @@ function exibe_itens_playlist(dados_playlist_ativa, id_playlist){
     tocando_agora(id_faixa_atual);
 }
 
-function atualiza_itens_playlist(id_playlist){
-    
+function atualiza_itens_playlist(id_playlist) {
+
     const content_faixas_playlist = document.getElementById("content_faixas_playlist");
 
     nome_artista_album = "Slondo"
@@ -149,11 +149,11 @@ function atualiza_itens_playlist(id_playlist){
     document.getElementById("qtd_faixas").innerHTML = dados_playlist_ativa.length > 1 ? `${dados_playlist_ativa.length} faixas` : `1 faixa`;
 
     let i = 0;
-    Object.keys(dados_playlist_ativa).map(function(key) {
+    Object.keys(dados_playlist_ativa).map(function (key) {
 
         let faixa_curtida = `<i class="far fa-heart fa-2x curtir_faixa faixa_n_curtida" onclick="curtir_faixa(${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})"></i>`;
 
-        if(faixas_curtidas.includes(`${dados_playlist_ativa[key]["id"]}:${dados_playlist_ativa[key]["album"]}`))
+        if (faixas_curtidas.includes(`${dados_playlist_ativa[key]["id"]}:${dados_playlist_ativa[key]["album"]}`))
             faixa_curtida = `<i class="fas fa-heart fa-2x curtir_faixa faixa_curtida" onclick="curtir_faixa(${dados_playlist_ativa[key]["id"]}, ${dados_playlist_ativa[key]["album"]})"></i>`;
 
         content_faixas_playlist.innerHTML += `<br>
@@ -184,7 +184,7 @@ function atualiza_itens_playlist(id_playlist){
 
         i++;
     });
-    
+
     sinc_botao_playlist(1);
     tocando_agora(id_faixa_atual);
 }
@@ -201,13 +201,13 @@ function carrega_playlist_pers(id_playlist) {
     let inicia = aleatorio != 1 ? 0 : Math.round((dados_playlist_ativa.length - 1) * Math.random());
     mudarPlayList(inicia);
 
-    $("#jquery_jplayer").jPlayer("play"); 
+    $("#jquery_jplayer").jPlayer("play");
 }
 
-function remove_faixa_playlist(id_playlist, id_faixa){
-    
+function remove_faixa_playlist(id_playlist, id_faixa) {
+
     playlists[id_playlist]["faixas"].splice(playlists[id_playlist]["faixas"].indexOf(id_faixa), 1);
-    
+
     const dados_album = constroi_playlist(id_playlist, true);
     dados_playlist_ativa = dados_album;
 
@@ -215,7 +215,7 @@ function remove_faixa_playlist(id_playlist, id_faixa){
     document.getElementById("opcoes_fx").style.display = "none";
 }
 
-function adiciona_faixa_playlist(id_playlist, id_faixa, req_auto){
+function adiciona_faixa_playlist(id_playlist, id_faixa, req_auto) {
 
     let nova_playlist = playlists[id_playlist]["faixas"];
     nova_playlist.push(id_faixa);
@@ -225,9 +225,9 @@ function adiciona_faixa_playlist(id_playlist, id_faixa, req_auto){
     const dados_album = constroi_playlist(id_playlist, true);
     dados_playlist_ativa = dados_album;
 
-    if(req_auto)
+    if (req_auto)
         atualiza_itens_playlist(id_playlist);
-    
+
     document.getElementById("opcoes_fx").style.display = "none";
 }
 

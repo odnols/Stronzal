@@ -1,45 +1,127 @@
 @keyframes puxa_infos_faixa {
-    from { bottom: -1000px; }
-    to { bottom: 10px; }
+    from {
+        bottom: -1000px;
+    }
+
+    to {
+        bottom: 10px;
+    }
 }
+
 @keyframes tocando_agora {
-    0% { margin-top: 2px; height: 38px; }
-    20% { margin-top: 20px; height: 18px; }
-    50% { margin-top: 33px; height: 5px; }
-    100% { margin-top: 2px; height: 38px; }
+    0% {
+        margin-top: 2px;
+        height: 38px;
+    }
+
+    20% {
+        margin-top: 20px;
+        height: 18px;
+    }
+
+    50% {
+        margin-top: 33px;
+        height: 5px;
+    }
+
+    100% {
+        margin-top: 2px;
+        height: 38px;
+    }
 }
+
 @keyframes tocando_agora2 {
-    0% { margin-top: 2px; height: 36px; }
-    50% { margin-top: 30px; height: 7px; }
-    70% { margin-top: 33px; height: 4px; }
-    100% { margin-top: 2px; height: 36px; }
+    0% {
+        margin-top: 2px;
+        height: 36px;
+    }
+
+    50% {
+        margin-top: 30px;
+        height: 7px;
+    }
+
+    70% {
+        margin-top: 33px;
+        height: 4px;
+    }
+
+    100% {
+        margin-top: 2px;
+        height: 36px;
+    }
 }
+
 @keyframes favorita_faixa {
-    0% { background-color: #141414 !important; }
-    50% { background-color: rgb(88, 17, 17) !important; }
-    100% { background-color: #141414 !important; }
+    0% {
+        background-color: #141414 !important;
+    }
+
+    50% {
+        background-color: rgb(88, 17, 17) !important;
+    }
+
+    100% {
+        background-color: #141414 !important;
+    }
 }
+
 @keyframes esconde_playlist {
-    from { right: 19px; }
-    to { right: -50%; }
+    from {
+        right: 19px;
+    }
+
+    to {
+        right: -50%;
+    }
 }
+
 @keyframes mostra_playlist {
-    from { right: -50%; }
-    to { right: 19px; }
+    from {
+        right: -50%;
+    }
+
+    to {
+        right: 19px;
+    }
 }
+
 @keyframes abre_lista_playlist {
-    from { transform: rotateZ(0deg); }
-    to { transform: rotateZ(180deg); }
+    from {
+        transform: rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateZ(180deg);
+    }
 }
+
 @keyframes fecha_lista_playlist {
-    from { transform: rotateZ(180deg); }
-    to { transform: rotateZ(360deg); }
+    from {
+        transform: rotateZ(180deg);
+    }
+
+    to {
+        transform: rotateZ(360deg);
+    }
 }
+
 @keyframes abre_configuracoes {
-    from { height: 0%; }
-    to { height: 100%; }    
+    from {
+        height: 0%;
+    }
+
+    to {
+        height: 100%;
+    }
 }
+
 @keyframes mostra_elemento {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
