@@ -35,6 +35,8 @@ $("#jquery_jplayer").jPlayer({
 function exibirPlayList() {
     $("#jplayer_playlist ul").empty();
 
+    if (!minhaPlayList) return
+
     for (let i = 0; i < minhaPlayList.length; i++) {
         var listItem = (i == minhaPlayList.length - 1) ? "<li class='jplayer_playlist_ultimo_item'>" : "<li>";
 
@@ -65,8 +67,6 @@ function exibirPlayList() {
 // Inicializa a playlist
 function playListInit(autoplay) {
 
-    console.log(indice_faixa_atual);
-
     if (autoplay)
         mudarPlayList(indice_faixa_atual);
     else
@@ -82,6 +82,9 @@ function playListConfig(index) {
         .addClass("jplayer_playlist_current").parent()
         .addClass("jplayer_playlist_current");
     playItem = index;
+
+    if (!minhaPlayList) return
+
     $("#jquery_jplayer").jPlayer("setFile", minhaPlayList[playItem].mp3, minhaPlayList[playItem].ogg);
 }
 

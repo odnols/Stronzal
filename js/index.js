@@ -11,6 +11,8 @@ function preview_playlist(nome_playlist) {
 
     document.getElementById("faixas_pl").innerHTML = "";
 
+    if (!minhaPlayList) return
+
     if (typeof nome_playlist === "undefined")
         document.getElementById("faixas_pl").innerHTML += `<h1 id="playlist_name">${albuns[minhaPlayList[0]["album"]]["name"]}</h1>`;
     else
@@ -53,6 +55,8 @@ function preview_playlist(nome_playlist) {
 }
 
 function mudarPlayList(index) {
+
+    if (!minhaPlayList) return
 
     playListConfig(index);
     tocando_agora(minhaPlayList[index]["id"]);
